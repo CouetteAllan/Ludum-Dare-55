@@ -31,11 +31,6 @@ public class GameManager : Singleton<GameManager>
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
     }
 
-    private void OnBossDeath()
-    {
-        ChangeGameState(GameState.Victory);
-    }
-
     private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
     {
         if (arg1.buildIndex == 1)

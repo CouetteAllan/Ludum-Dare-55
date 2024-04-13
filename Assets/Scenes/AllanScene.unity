@@ -603,9 +603,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8c9bdc290e44441b4913dbca5351d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pattern: {fileID: 8683889172735665238, guid: 43e7f76c9798cc244a2ad4f362d1afbd, type: 3}
+  _patterns:
+  - {fileID: 11400000, guid: 90c294eea2de6764592644f0ce7107c9, type: 2}
+  - {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
   _canvas: {fileID: 1425344958}
   _line: {fileID: 64968902}
+  _circleDuration: 2
+  _circleInterval: 1
 --- !u!4 &2029317264
 Transform:
   m_ObjectHideFlags: 0

@@ -1,12 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QTEManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _pattern;
+    [SerializeField] private PatternSO[] _patterns;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private LineRenderer _line;
+
+    [Header("Circle Parameter")]
+    [SerializeField] private float _circleDuration;
+    [SerializeField] private float _circleInterval = 2.0f;
 
     private List<CircleQTE> _circles = new List<CircleQTE>();
     private int _previousIndex = -1;
@@ -24,15 +30,32 @@ public class QTEManager : MonoBehaviour
 
     private void SpawnPattern()
     {
-        int index = 0;
-        var patternSpawned = Instantiate(_pattern, _canvas.transform);
-        foreach(CircleQTE circle in patternSpawned.GetComponentsInChildren<CircleQTE>())
+        var patternSpawned = Instantiate(_patterns[0].PatternPrefab, _canvas.transform);
+        foreach(var circle in patternSpawned.GetComponentsInChildren<CircleQTE>())
         {
-            _circles.Add(circle);
-            circle.InitCircle(index,this);
-            index++;
+            circle.gameObject.SetActive(false);
         }
 
+        StartCoroutine(SpawnCirclePattern(patternSpawned.GetComponentsInChildren<CircleQTE>(true)));
+
+    }
+
+    private IEnumerator SpawnCirclePattern(CircleQTE[] circles)
+    {
+        int index = 0;
+        foreach (CircleQTE circle in circles)
+        {
+            circle.gameObject.SetActive(true);
+            _circles.Add(circle);
+            circle.InitCircle(index, this, _circleDuration);
+            index++;
+            yield return new WaitForSeconds(_circleInterval);
+        }
+    }
+
+    public void RemoveCircle(CircleQTE circle)
+    {
+        _circles.Remove(circle);
     }
 
     public void StartDrawing(Vector2 firstPoint)
