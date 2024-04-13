@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+using UnityEngine;
 
 public enum CombatPhase
 {
@@ -12,6 +14,8 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
 {
     public static event Action<CombatPhase> OnChangePhase;
 
+    [SerializeField] private TextMeshProUGUI _textDebug;
+
     public CombatPhase CurrentPhase { get; private set; } = CombatPhase.EnemyAttack;
 
     protected override void Awake()
@@ -20,9 +24,9 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
     }
 
-    private void GameManager_OnGameStateChanged(GameState obj)
+    private void GameManager_OnGameStateChanged(GameState newPhase)
     {
-        if(obj == GameState.StartGame)
+        if(newPhase == GameState.StartGame)
         {
             ChangePhase(CombatPhase.Encounter);
         }
@@ -37,6 +41,8 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         switch (newPhase)
         {
             case CombatPhase.Encounter:
+                //Play Encounter;
+                Invoke("ChangeToPickPhase", 5.0f);
                 break;
             case CombatPhase.PickSummoning:
                 break;
@@ -46,6 +52,18 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
                 break;
         }
 
+        _textDebug.text = newPhase.ToString();
         OnChangePhase?.Invoke(newPhase);
+    }
+
+    private void ChangeToPickPhase()
+    {
+        ChangePhase(CombatPhase.PickSummoning);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+
     }
 }

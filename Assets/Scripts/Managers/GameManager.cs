@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager>
                 Time.fixedDeltaTime = Time.timeScale * 0.01f;
                 break;
             case GameState.StartGame:
+                InitGame();
                 Time.timeScale = 1.0f;
                 Time.fixedDeltaTime = Time.timeScale * 0.01f;
                 break;

@@ -10,8 +10,17 @@ public class SummoningManager : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.OnGameStateChanged += OnGameStateChanged;
+        TurnBasedManager.OnChangePhase += OnChangePhase;
         SummoningUI.OnClick += SummoningUI_OnClick;
+        QTEManagerDataHandler.OnSendScore += OnSendScore;
+    }
+
+    private void OnSendScore(Score finalPatternScore)
+    {
+        //Summon with the according accuracy
+        //Instantiate with the _selectedSumoningData if more than a certain accuracy
+
+
     }
 
     private void SummoningUI_OnClick(SummoningUI obj)
@@ -19,9 +28,9 @@ public class SummoningManager : MonoBehaviour
         _selectedSummoningData = obj.GetSummoningDatas();
     }
 
-    private void OnGameStateChanged(GameState newState)
+    private void OnChangePhase(CombatPhase newPhase)
     {
-        if(newState == GameState.StartGame)
+        if(newPhase == CombatPhase.PickSummoning)
             OpenSelection();
     }
 
@@ -40,5 +49,11 @@ public class SummoningManager : MonoBehaviour
         _canvas.gameObject.SetActive(false);
         //Send datas
         QTEManagerDataHandler.SendPatternAndStart(_selectedSummoningData.Pattern);
+    }
+
+    private void OnDisable()
+    {
+        TurnBasedManager.OnChangePhase -= OnChangePhase;
+        SummoningUI.OnClick -= SummoningUI_OnClick;
     }
 }

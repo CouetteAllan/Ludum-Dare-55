@@ -27,7 +27,6 @@ public class ScoreManager : MonoBehaviour
 
     private void OnCircleClicked(PrecisionState precision)
     {
-        Debug.Log(precision.ToString());
         //Update Accuracy
         _currentScore.CalculateAccuracy(GetAccuracyWithPrecision(precision));
         _accuracyText.text = "Accuracy: " +_currentScore.ToString();
