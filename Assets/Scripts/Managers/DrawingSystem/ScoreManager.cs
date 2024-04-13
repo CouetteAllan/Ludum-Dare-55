@@ -12,6 +12,12 @@ public class ScoreManager : MonoBehaviour
     {
         QTEManagerDataHandler.OnCircleClicked += OnCircleClicked;
         QTEManagerDataHandler.OnStartSpawnPattern += OnStartSpawnPattern;
+        QTEManagerDataHandler.OnPatternFinished += OnPatternFinished;
+    }
+
+    private void OnPatternFinished()
+    {
+        QTEManagerDataHandler.SendScore(_currentScore);
     }
 
     private void OnStartSpawnPattern()
@@ -36,7 +42,7 @@ public class ScoreManager : MonoBehaviour
             case PrecisionState.Good:
                 return 95.0f;
             case PrecisionState.Missed:
-                return 0.0f;
+                return 10.0f;
 
             default:
                 return 0.0f;

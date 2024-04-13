@@ -45,14 +45,21 @@ public class QTEManager : MonoBehaviour
     private IEnumerator SpawnCirclePattern(CircleQTE[] circles)
     {
         int index = 0;
-        foreach (CircleQTE circle in circles)
+        for(int i = 0; i < _patterns[0].NbOfLoop; i++)
         {
-            circle.gameObject.SetActive(true);
-            _circles.Add(circle);
-            circle.InitCircle(index, this, _circleDuration);
-            index++;
-            yield return new WaitForSeconds(_circleInterval);
+            foreach (CircleQTE circle in circles)
+            {
+                circle.gameObject.SetActive(true);
+                _circles.Add(circle);
+                circle.InitCircle(index, this, _circleDuration);
+                index++;
+                yield return new WaitForSeconds(_circleInterval);
+            }
+            index = 0;
+            yield return new WaitForSeconds(_circleInterval + _circleDuration);
         }
+
+        QTEManagerDataHandler.PatternFinished();
     }
 
     public void RemoveCircle(CircleQTE circle)

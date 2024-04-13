@@ -29,6 +29,7 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
     
     public void InitCircle(int index, QTEManager manager,float duration)
     {
+        this.gameObject.SetActive(true);
         _index = index;
         _circleDuration = duration;
         _indexText.text = (index + 1).ToString();
@@ -78,8 +79,8 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         }
 
         PrecisionState precision = EvaluatePrecision(_circleDuration - duration);
-        this.CircleClicked(precision);
-        Destroy(this.gameObject);
+        QTEManagerDataHandler.CircleClicked(precision);
+        this.gameObject.SetActive(false);
     }
 
     private PrecisionState EvaluatePrecision(float clickTime)
