@@ -84,16 +84,15 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
 
     private PrecisionState EvaluatePrecision(float clickTime)
     {
-        Debug.Log(clickTime);
         float absTime = Mathf.Abs(clickTime);
-        
+        absTime = absTime / _circleDuration;
         switch (absTime)
         {
-            case < .2f:
+            case < .05f:
                 var perfectParticles = Instantiate(_particleSystemsFeedback[2], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
                 perfectParticles.Play();
                 return PrecisionState.Perfect;
-            case < .5f:
+            case < .25f:
                 var goodParticle = Instantiate(_particleSystemsFeedback[0], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
                 goodParticle.Play();
                 return PrecisionState.Good;

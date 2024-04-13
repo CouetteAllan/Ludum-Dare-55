@@ -609,7 +609,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
   _canvas: {fileID: 1425344958}
   _line: {fileID: 64968902}
-  _circleDuration: 2
+  _circleDuration: 1
   _circleInterval: 1
 --- !u!4 &2029317264
 Transform:

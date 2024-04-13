@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+
+
     void Awake()
     {
         QTEManagerDataHandler.OnCircleClicked += OnCircleClicked;
