@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class QTEManager : MonoBehaviour
 {
-    [SerializeField] private PatternSO[] _patterns;
+    [SerializeField] private PatternSO _pattern;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private LineRenderer _line;
 
@@ -18,21 +18,30 @@ public class QTEManager : MonoBehaviour
     private int _previousIndex = -1;
     private bool _isDrawing = false;
     public bool IsDrawing => _isDrawing;
+
     void Awake()
     {
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+        QTEManagerDataHandler.OnSendPatternAndStart += OnSendPatternAndStart;
+    }
+
+    private void OnSendPatternAndStart(PatternSO pattern)
+    {
+        _pattern = pattern;
+        SpawnPattern();
     }
 
     private void GameManager_OnGameStateChanged(GameState newState)
     {
-        if(newState == GameState.StartGame)
-            SpawnPattern();
+        /*if(newState == GameState.StartGame)
+            SpawnPattern();*/
     }
 
     private void SpawnPattern()
     {
+        _canvas.gameObject.SetActive(true);
         this.StartSpawnPattern();
-        var patternSpawned = Instantiate(_patterns[0].PatternPrefab, _canvas.transform);
+        var patternSpawned = Instantiate(_pattern.PatternPrefab, _canvas.transform);
         foreach(var circle in patternSpawned.GetComponentsInChildren<CircleQTE>())
         {
             circle.gameObject.SetActive(false);
@@ -45,7 +54,7 @@ public class QTEManager : MonoBehaviour
     private IEnumerator SpawnCirclePattern(CircleQTE[] circles)
     {
         int index = 0;
-        for(int i = 0; i < _patterns[0].NbOfLoop; i++)
+        for(int i = 0; i < _pattern.NbOfLoop; i++)
         {
             foreach (CircleQTE circle in circles)
             {

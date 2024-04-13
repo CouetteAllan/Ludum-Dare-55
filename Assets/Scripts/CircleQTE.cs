@@ -20,7 +20,6 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
 
     private float _circleDuration = 2.0f;
 
-    private bool _missed = false;
     private bool _hasBeenClicked = false;
 
     private QTEManager _manager;
@@ -29,6 +28,8 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
     
     public void InitCircle(int index, QTEManager manager,float duration)
     {
+        _hasBeenClicked = false;
+
         this.gameObject.SetActive(true);
         _index = index;
         _circleDuration = duration;
@@ -51,7 +52,7 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         _manager.SetPreviousIndex(_index);
         //Trigger Feedback
 
-        _manager.RemoveCircle(this);
+        //_manager.RemoveCircle(this);
     }
 
     private IEnumerator ShrinkBorder()
