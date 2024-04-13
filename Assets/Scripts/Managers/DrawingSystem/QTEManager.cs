@@ -31,6 +31,7 @@ public class QTEManager : MonoBehaviour
 
     private void SpawnPattern()
     {
+        this.StartSpawnPattern();
         var patternSpawned = Instantiate(_patterns[0].PatternPrefab, _canvas.transform);
         foreach(var circle in patternSpawned.GetComponentsInChildren<CircleQTE>())
         {
