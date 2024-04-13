@@ -6,8 +6,6 @@ using UnityEngine;
 public class PatternSO : ScriptableObject
 {
     public string PatternName;
-    public GameObject PatternPrefab;
+    public GameObject[] PatternPrefabs;
 
-    [Range(1,5)]
-    public int NbOfLoop = 1;
 }

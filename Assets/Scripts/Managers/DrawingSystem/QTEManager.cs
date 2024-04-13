@@ -51,22 +51,23 @@ public class QTEManager : MonoBehaviour
     {
         _canvas.gameObject.SetActive(true);
         this.StartSpawnPattern();
-        var patternSpawned = Instantiate(_pattern.PatternPrefab, _canvas.transform);
-        foreach(var circle in patternSpawned.GetComponentsInChildren<CircleQTE>())
-        {
-            circle.gameObject.SetActive(false);
-        }
+        
 
-        StartCoroutine(SpawnCirclePattern(patternSpawned.GetComponentsInChildren<CircleQTE>(true)));
+        StartCoroutine(SpawnCirclePattern());
 
     }
 
-    private IEnumerator SpawnCirclePattern(CircleQTE[] circles)
+    private IEnumerator SpawnCirclePattern()
     {
         int index = 0;
-        for(int i = 0; i < _pattern.NbOfLoop; i++)
+        for(int i = 0; i < _pattern.PatternPrefabs.Length; i++)
         {
-            foreach (CircleQTE circle in circles)
+            var patternSpawned = Instantiate(_pattern.PatternPrefabs[i], _canvas.transform);
+            foreach (var circle in patternSpawned.GetComponentsInChildren<CircleQTE>())
+            {
+                circle.gameObject.SetActive(false);
+            }
+            foreach (CircleQTE circle in patternSpawned.GetComponentsInChildren<CircleQTE>(true))
             {
                 circle.gameObject.SetActive(true);
                 _circles.Add(circle);
@@ -76,6 +77,8 @@ public class QTEManager : MonoBehaviour
             }
             index = 0;
             yield return new WaitForSeconds(_circleInterval + _circleDuration);
+            Destroy(patternSpawned.gameObject);
+            _isDrawing = false;
         }
 
         QTEManagerDataHandler.PatternFinished();

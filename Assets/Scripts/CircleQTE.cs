@@ -40,7 +40,7 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        var cam = Camera.main;
+        var cam = Utils.MainCamera;
 
         _hasBeenClicked = true;
         
@@ -50,7 +50,6 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
             _manager.AddPointToLine(cam.ScreenToWorldPoint(this.transform.position));
 
         _manager.SetPreviousIndex(_index);
-        //Trigger Feedback
 
         //_manager.RemoveCircle(this);
     }
