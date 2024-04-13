@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Sablier
   m_EditorClassIdentifier: 
   PatternName: Hourglass
-  PatternPrefab: {fileID: 0}
+  PatternPrefab: {fileID: 8683889172735665238, guid: a1917fda4d7a17b43bcabe40984b5c64, type: 3}
   NbOfLoop: 1

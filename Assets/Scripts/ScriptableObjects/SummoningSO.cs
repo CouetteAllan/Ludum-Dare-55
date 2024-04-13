@@ -9,7 +9,5 @@ public class SummoningSO : ScriptableObject
     public PatternSO Pattern;
     public Sprite SummoningImage;
 
-    [Header("Summoning Stats")]
-    public float MaxHealth;
-    public float Damage;
+    
 }

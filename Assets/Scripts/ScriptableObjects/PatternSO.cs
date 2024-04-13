@@ -8,6 +8,6 @@ public class PatternSO : ScriptableObject
     public string PatternName;
     public GameObject PatternPrefab;
 
-    [Range(0,5)]
+    [Range(1,5)]
     public int NbOfLoop = 1;
 }

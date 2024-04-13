@@ -21,8 +21,18 @@ public class QTEManager : MonoBehaviour
 
     void Awake()
     {
-        GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
+        TurnBasedManager.OnChangePhase += TurnBasedManager_OnChangePhase;
         QTEManagerDataHandler.OnSendPatternAndStart += OnSendPatternAndStart;
+    }
+
+    private void TurnBasedManager_OnChangePhase(CombatPhase newPhase)
+    {
+        if(newPhase != CombatPhase.PickSummoning)
+        {
+            _canvas.gameObject.SetActive(false);
+            _line.positionCount = 1;
+            _line.gameObject.SetActive(false);
+        }
     }
 
     private void OnSendPatternAndStart(PatternSO pattern)
@@ -78,6 +88,7 @@ public class QTEManager : MonoBehaviour
 
     public void StartDrawing(Vector2 firstPoint)
     {
+        _line.gameObject.SetActive(true);
         _line.positionCount = 1;
         _line.SetPosition(0,firstPoint);
         _isDrawing = true;

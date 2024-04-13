@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 800340460629506267}
   - component: {fileID: 7404622195428416699}
   m_Layer: 5
-  m_Name: SummoningUI
+  m_Name: SummoningCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

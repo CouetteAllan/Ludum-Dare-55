@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour
         switch (precision)
         {
             case PrecisionState.Perfect:
-                return 105.0f;
+                return 102.0f;
             case PrecisionState.Good:
                 return 95.0f;
             case PrecisionState.Missed:
