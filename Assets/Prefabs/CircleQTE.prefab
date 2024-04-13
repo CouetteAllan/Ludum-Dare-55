@@ -90,6 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _indexText: {fileID: 8476201456727370684}
+  _particleSystemsFeedback:
+  - {fileID: 1866002185026859743, guid: 30e679307170d6e4b9fec7593ac4b787, type: 3}
+  - {fileID: 3978651829682235777, guid: c489c56dd16f2b640ac483a2bd9d2082, type: 3}
 --- !u!1 &5400799633746021508
 GameObject:
   m_ObjectHideFlags: 0
