@@ -21,8 +21,11 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
     private float _circleDuration = 2.0f;
 
     private bool _missed = false;
+    private bool _hasBeenClicked = false;
 
     private QTEManager _manager;
+
+    
     
     public void InitCircle(int index, QTEManager manager,float duration)
     {
@@ -37,21 +40,9 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
     {
         var cam = Camera.main;
 
-        StopAllCoroutines();
-        //Trigger action 
-        if (_manager.IsNextIndex(_index) || !_missed)
-        {
-            var particle = Instantiate(_particleSystemsFeedback[0], cam.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity) ;
-            particle.Play();
-
-        }
-        else
-        {
-            var particle = Instantiate(_particleSystemsFeedback[1], cam.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
-            particle.Play();
-        }
-
-        if (_index == 0)
+        _hasBeenClicked = true;
+        
+        if (!_manager.IsDrawing)
             _manager.StartDrawing(cam.ScreenToWorldPoint(this.transform.position));
         else
             _manager.AddPointToLine(cam.ScreenToWorldPoint(this.transform.position));
@@ -60,7 +51,6 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         //Trigger Feedback
 
         _manager.RemoveCircle(this);
-        Destroy(this.gameObject);
     }
 
     private IEnumerator ShrinkBorder()
@@ -72,12 +62,45 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         _edgeRectTransform.localScale = maxScale;
         while (Time.time < startTime + _circleDuration)
         {
-            duration += Time.deltaTime;
-            _edgeRectTransform.localScale = Vector3.Lerp(maxScale, minScale, duration);
+            if (_hasBeenClicked)
+                break;
+            duration = Mathf.Clamp(duration + Time.deltaTime, 0.0f, _circleDuration);
+            _edgeRectTransform.localScale = Vector3.Lerp(maxScale, minScale, duration / _circleDuration);
             yield return null;
         }
 
-        yield return null;
-        _missed = true;
+        while (Time.time < startTime + _circleDuration * 2)
+        {
+            if (_hasBeenClicked)
+                break;
+            duration += Time.deltaTime;
+            yield return null;
+        }
+
+        PrecisionState precision = EvaluatePrecision(_circleDuration - duration);
+        this.CircleClicked(precision);
+        Destroy(this.gameObject);
+    }
+
+    private PrecisionState EvaluatePrecision(float clickTime)
+    {
+        Debug.Log(clickTime);
+        float absTime = Mathf.Abs(clickTime);
+        
+        switch (absTime)
+        {
+            case < .2f:
+                var perfectParticles = Instantiate(_particleSystemsFeedback[2], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
+                perfectParticles.Play();
+                return PrecisionState.Perfect;
+            case < .5f:
+                var goodParticle = Instantiate(_particleSystemsFeedback[0], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
+                goodParticle.Play();
+                return PrecisionState.Good;
+            default:
+                var missedParticles = Instantiate(_particleSystemsFeedback[1], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
+                missedParticles.Play();
+                return PrecisionState.Missed;
+        }
     }
 }

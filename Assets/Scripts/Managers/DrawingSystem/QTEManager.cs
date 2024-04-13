@@ -16,7 +16,8 @@ public class QTEManager : MonoBehaviour
 
     private List<CircleQTE> _circles = new List<CircleQTE>();
     private int _previousIndex = -1;
-
+    private bool _isDrawing = false;
+    public bool IsDrawing => _isDrawing;
     void Awake()
     {
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
@@ -62,6 +63,7 @@ public class QTEManager : MonoBehaviour
     {
         _line.positionCount = 1;
         _line.SetPosition(0,firstPoint);
+        _isDrawing = true;
     }
 
     public void AddPointToLine(Vector2 point)
