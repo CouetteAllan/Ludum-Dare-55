@@ -46,14 +46,22 @@ public class GameManager : Singleton<GameManager>
         switch (CurrentState)
         {
             case GameState.MainMenu:
+                Time.timeScale = 1.0f;
+                Time.fixedDeltaTime = Time.timeScale * 0.01f;
                 break;
             case GameState.StartGame:
+                Time.timeScale = 1.0f;
+                Time.fixedDeltaTime = Time.timeScale * 0.01f;
                 break;
             case GameState.InGame:
+                Time.timeScale = 1.0f;
+                Time.fixedDeltaTime = Time.timeScale * 0.01f;
                 break;
             case GameState.GameOver:
                 break;
             case GameState.Pause:
+                Time.timeScale = 0.0f;
+                Time.fixedDeltaTime = Time.timeScale * 0.01f;
                 break;
             case GameState.Victory:
                 break;

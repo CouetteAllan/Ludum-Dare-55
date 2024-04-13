@@ -182,14 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8c9bdc290e44441b4913dbca5351d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patterns:
-  - {fileID: 11400000, guid: 90c294eea2de6764592644f0ce7107c9, type: 2}
-  - {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
-  - {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
+  _pattern: {fileID: 0}
   _canvas: {fileID: 8821609222551970389}
   _line: {fileID: 7605024910593541}
   _circleDuration: 1
-  _circleInterval: 1
+  _circleInterval: 0.8
 --- !u!114 &5489477703544238779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7576370993056152449
 RectTransform:
   m_ObjectHideFlags: 0
