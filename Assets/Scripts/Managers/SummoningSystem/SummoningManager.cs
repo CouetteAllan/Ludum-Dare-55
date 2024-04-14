@@ -8,7 +8,6 @@ public class SummoningManager : MonoBehaviour
     [SerializeField] private SummoningCardUI[] _summoningUis;
     [Header("Summonings")]
     [SerializeField] private Summoning _summoning;
-    [SerializeField] private Summoning _Enemy;
     private SummoningSO _selectedSummoningData;
 
     private void Awake()
@@ -39,7 +38,6 @@ public class SummoningManager : MonoBehaviour
         if(newPhase == CombatPhase.PickSummoning)
         {
             OpenSelection();
-            _Enemy.transform.position = new Vector2(12, 0);
         }
         else
         {
