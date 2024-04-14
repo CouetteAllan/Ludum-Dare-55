@@ -24,6 +24,7 @@ public class Summoning : MonoBehaviour
     public void ChangeSummonning()
     {
         SummoningManagerDataHandler.OnAllySummoningAttack -= OnAllySummoningAttack;
+        _datas = null;
         this.gameObject.SetActive(false);
     }
 
@@ -35,7 +36,8 @@ public class Summoning : MonoBehaviour
         _animator.SetTrigger("Attack");
         //Do damage and change progress bar
 
-        DominationManagerDataHandler.UpdateDominationBar(.2f);
+        Debug.Log("ally attacks");
+        DominationManagerDataHandler.UpdateDominationBar(.4f);
     }
 
     public void FinishedAnime()

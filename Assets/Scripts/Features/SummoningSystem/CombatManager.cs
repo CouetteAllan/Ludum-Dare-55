@@ -17,24 +17,43 @@ public class CombatManager : MonoBehaviour
     private SummoningSO _allySummoningData;
     private SpellSO _currentSpell;
 
+    private bool _enemyStillHere = true;
+
     private void Awake()
     {
         SummoningManagerDataHandler.OnAttackPhase += OnAttackPhase;
         TurnBasedManager.OnChangePhase += TurnBasedManager_OnChangePhase;
+        DominationManagerDataHandler.OnDominationComplete += OnDominationComplete;
+    }
+
+    private void OnDominationComplete(bool allyVictory)
+    {
+        _enemyStillHere = !allyVictory;
     }
 
     private void TurnBasedManager_OnChangePhase(CombatPhase newPhase)
     {
-        if (newPhase == CombatPhase.PickSummoning || newPhase == CombatPhase.EnemyAttack)
-            QTEManagerDataHandler.OnSendScore -= OnSendScore;
-        else if (newPhase == CombatPhase.AllyAttack && _allySummoningData != null)
-            OnAttackPhase(_allySummoningData);
+        switch (newPhase)
+        {
+            case CombatPhase.PickSummoning:
+                _enemyStillHere = true;
+                _allySummoningData = null;
+                QTEManagerDataHandler.OnSendScore -= OnSendScore;
+                break;
+            case CombatPhase.EnemyAttack:
+                QTEManagerDataHandler.OnSendScore -= OnSendScore;
+                _enemyStillHere = true;
+                break;
+            case CombatPhase.AllyAttack when _allySummoningData != null:
+                OnAttackPhase(_allySummoningData);
+                break;
+        }
     }
 
     private void OnSendScore(Score finalScore)
     {
         //DoAttack
-        if (finalScore.accuracy > 80.0f)
+        if (finalScore.accuracy > 84.0f)
             SummoningManagerDataHandler.AllySummoningAttack(finalScore, _currentSpell, EndAllyTurn);
         else
         {
@@ -46,13 +65,13 @@ public class CombatManager : MonoBehaviour
 
     private void EndAllyTurn()
     {
+        if (!_enemyStillHere)
+            return;
         TurnBasedManager.Instance.ChangePhase(CombatPhase.EnemyAttack);
-
     }
 
     private void SummoningCardUI_OnClick(SummoningCardUI card)
     {
-
         _currentSpell = (SpellSO)card.GetCardDatas();
     }
 
@@ -61,6 +80,7 @@ public class CombatManager : MonoBehaviour
         //Display spell cards
         _allySummoningData = summoning;
         _canva.SetActive(true);
+        _enemyStillHere = true;
         int index = 0;
         foreach (var card in _spellCards)
         {

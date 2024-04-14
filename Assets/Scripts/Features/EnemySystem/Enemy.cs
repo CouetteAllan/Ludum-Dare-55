@@ -18,6 +18,15 @@ public class Enemy : MonoBehaviour
     public void EnemyAttack()
     {
         _animator.SetTrigger("Attack");
+    }
+
+    public void DealDamage()
+    {
         DominationManagerDataHandler.UpdateDominationBar(-.1f);
+    }
+
+    public void EndEnemyAttack()
+    {
+        TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
     }
 }

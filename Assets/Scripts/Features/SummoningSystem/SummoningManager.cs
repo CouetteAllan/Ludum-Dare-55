@@ -22,7 +22,8 @@ public class SummoningManager : MonoBehaviour
         _summoning.gameObject.SetActive(true);
         _summoning.Init(this, _selectedSummoningData);
         TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
-        Invoke("AttackPhase", 2.0f); //2sec delay 
+        //2sec delay 
+        Invoke("AttackPhase", 2.0f);
 
     }
 
@@ -37,6 +38,8 @@ public class SummoningManager : MonoBehaviour
     {
         if(newPhase == CombatPhase.PickSummoning)
         {
+            _summoning.ChangeSummonning();
+            _summoning.gameObject.SetActive(false);
             OpenSelection();
         }
         else

@@ -23,6 +23,10 @@ public class DominationManager : MonoBehaviour
     private void OnUpdateDominationBar(float dominationPercentChange)
     {
         _progressPercent = Mathf.Clamp(_progressPercent + dominationPercentChange,0.0f,1.0f);
+        if (_progressPercent <= 0.0f)
+            DominationManagerDataHandler.DominationComplete(allyVictory: false);
+        else if(_progressPercent >= 1.0f)
+            DominationManagerDataHandler.DominationComplete(allyVictory: true);
 
         //Update visuals
         RefreshCandles(_progressPercent);
@@ -37,6 +41,15 @@ public class DominationManager : MonoBehaviour
 
     private void InitProgressBar()
     {
+        if(_candles.Count > 0)
+        {
+            foreach (var candle in _candles)
+            {
+                Destroy(candle.gameObject);
+            }
+            _candles.Clear();
+        }
+
         Debug.Log("Init Progress");
         int remainingCandles = Mathf.FloorToInt(_progressPercent * _maxCandle);
         int evilCandles = _maxCandle - remainingCandles;
