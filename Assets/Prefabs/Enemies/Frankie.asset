@@ -15,7 +15,19 @@ MonoBehaviour:
   EnemyFullName: Frankie The Ashamed
   EnemyName: 0
   EnemyImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
-  StartDomination: 10
+  StartDominationInPercent: 0.5
   AttackNames:
   - Guilt Trip
   - Gaslight
+  PreEncounter: He is there, in front of me. I found this damned soul, overwhelmed
+    by shame and guilt. From him emanates an aggressive aura, which his self-punishments
+    had transformed into a ravaged and dangerous soul, for others but especially
+    for himself.
+  PostEncounter: 'His fears and accusations fell on me and I understood the distress
+    in which he was. I heard the remarks he had experienced, I saw the shame of his
+    mistakes and his decisions. He had been devoured by this feeling of having caused
+    misfortune to the world.
+
+    I was able to invoke my faithful companions, and
+    we helped him to overcome and calm this shame which invaded him. The work on
+    himself remains important, but he is out of the woods.'
