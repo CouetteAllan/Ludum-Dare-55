@@ -1303,6 +1303,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 551641343864639017, guid: 0a28b4bc873e6e644a1f3239e3c12fb4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2468751010604584978, guid: 0a28b4bc873e6e644a1f3239e3c12fb4, type: 3}
       propertyPath: m_Name
       value: TurnBasedManager
@@ -1346,10 +1350,6 @@ PrefabInstance:
     - target: {fileID: 2664945020532352092, guid: 0a28b4bc873e6e644a1f3239e3c12fb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2709777458994603536, guid: 0a28b4bc873e6e644a1f3239e3c12fb4, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyFullName: Vadim The Hater
   EnemyName: 2
-  EnemyImage: {fileID: 0}
+  EnemyImage: {fileID: 21300000, guid: 6ec4a3f3ea05cd84494868a784c01191, type: 3}
   StartDominationInPercent: 0.8
   AttackNames:
   - Roast

@@ -17,6 +17,8 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
     public static event Action<CombatPhase> OnChangePhase;
 
     [SerializeField] private TextMeshProUGUI _textDebug;
+    [SerializeField] private Canvas _encounterCanvas;
+    [SerializeField] private TextMeshProUGUI _longEncounterText;
 
     public CombatPhase CurrentPhase { get; private set; } = CombatPhase.EnemyAttack;
 
@@ -30,7 +32,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
     private void OnDominationComplete(bool allyVictory)
     {
         if (allyVictory)
-            Invoke("ChangeToEncounter", 2.0f);
+            Invoke("ChangeToAfterEncounter", 2.0f);
         else
             GameManager.Instance.ChangeGameState(GameState.GameOver);
     }
@@ -39,7 +41,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
     {
         if(newPhase == GameState.StartGame)
         {
-            ChangePhase(CombatPhase.Encounter);
+            ChangePhase(CombatPhase.BeforeEncounter);
         }
     }
 
@@ -52,8 +54,12 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         _textDebug.text = newPhase.ToString();
         switch (newPhase)
         {
+            case CombatPhase.BeforeEncounter:
+                _encounterCanvas.gameObject.SetActive(true);
+                break;
             case CombatPhase.Encounter:
                 //Play Encounter;
+                _encounterCanvas.gameObject.SetActive(false);
                 Invoke("ChangeToPickPhase", 2.0f);
                 break;
             case CombatPhase.PickSummoning:
@@ -64,7 +70,9 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
                 break;
             case CombatPhase.EnemyAttack:
                 //If Enemy stil alive, keepgoing
-
+                break;
+            case CombatPhase.AfterEncounter:
+                _encounterCanvas.gameObject.SetActive(true);
                 break;
         }
 
@@ -81,10 +89,16 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         ChangePhase(CombatPhase.AllyAttack);
     }
 
-    private void ChangeToEncounter()
+    public void ChangeToEncounter()
     {
         ChangePhase(CombatPhase.Encounter);
     }
+
+    private void ChangeToAfterEncounter()
+    {
+        ChangePhase(CombatPhase.AfterEncounter);
+    }
+
 
     private void OnDisable()
     {
