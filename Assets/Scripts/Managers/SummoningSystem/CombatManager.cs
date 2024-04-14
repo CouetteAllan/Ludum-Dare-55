@@ -34,6 +34,7 @@ public class CombatManager : MonoBehaviour
     private void OnSendScore(Score finalScore)
     {
         //DoAttack
+        //Do HealthChange
         TurnBasedManager.Instance.ChangePhase(CombatPhase.EnemyAttack);
     }
 
