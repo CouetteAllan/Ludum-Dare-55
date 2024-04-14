@@ -19,4 +19,7 @@ public class EnemySO : ScriptableObject
     [Range(0.1f,0.9f)]public float StartDominationInPercent = .5f;
 
     public string[] AttackNames = new string[2];
+
+    [TextArea(3, 10)] public string PreEncounter;
+    [TextArea(3, 10)] public string PostEncounter;
 }

@@ -6,13 +6,26 @@ public class SummoningManager : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
     [SerializeField] private SummoningCardUI[] _summoningUis;
+    [SerializeField] private Canvas _deckCanvas;
     [Header("Summonings")]
     [SerializeField] private Summoning _summoning;
     private SummoningSO _selectedSummoningData;
 
+    private bool _deckIsOpen = false;
+
     private void Awake()
     {
         TurnBasedManager.OnChangePhase += OnChangePhase;
+        SummoningManagerDataHandler.OnDeckClicked += OnDeckClicked;
+    }
+
+    private void OnDeckClicked()
+    {
+        _deckIsOpen = !_deckIsOpen;
+        if (_deckIsOpen == true)
+            TurnBasedManager.Instance.ChangePhase(CombatPhase.ChosingInDeck);
+        else
+            TurnBasedManager.Instance.ChangePhase(TurnBasedManager.Instance.PreviousPhase);
     }
 
     private void OnSendScore(Score finalPatternScore)
@@ -20,6 +33,7 @@ public class SummoningManager : MonoBehaviour
         //Summon with the according accuracy
         //Instantiate with the _selectedSumoningData if more than a certain accuracy
         _summoning.gameObject.SetActive(true);
+        Debug.Log("Init ALly");
         _summoning.Init(this, _selectedSummoningData);
         TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
         //2sec delay 
@@ -45,11 +59,14 @@ public class SummoningManager : MonoBehaviour
 
     private void OnChangePhase(CombatPhase newPhase)
     {
+
+        _deckCanvas.gameObject.SetActive(newPhase == CombatPhase.AllyAttack || newPhase == CombatPhase.ChosingInDeck);
         if(newPhase == CombatPhase.PickSummoning)
         {
             _summoning.ChangeSummonning();
             _summoning.gameObject.SetActive(false);
-            OpenSelection();
+            _deckCanvas.gameObject.SetActive(false);
+            OpenSelection(true);
         }
         else
         {
@@ -57,16 +74,27 @@ public class SummoningManager : MonoBehaviour
         }
     }
 
-    private void OpenSelection()
+    private void OpenSelection(bool open)
     {
-        SummoningCardUI.OnClick += SummoningUI_OnClick;
-        QTEManagerDataHandler.OnSendScore += OnSendScore;
-
-        _canvas.gameObject.SetActive(true);
-        foreach (var _summoningUI in _summoningUis)
+        if (open)
         {
-            _summoningUI.Init();
+            SummoningCardUI.OnClick += SummoningUI_OnClick;
+            QTEManagerDataHandler.OnSendScore += OnSendScore;
+
+            _canvas.gameObject.SetActive(true);
+            foreach (var _summoningUI in _summoningUis)
+            {
+                _summoningUI.Init();
+            }
         }
+        else
+        {
+            SummoningCardUI.OnClick -= SummoningUI_OnClick;
+            QTEManagerDataHandler.OnSendScore -= OnSendScore;
+
+            _canvas.gameObject.SetActive(false);
+        }
+        
     }
 
     public void ConfirmSelectSummoning()
@@ -76,6 +104,7 @@ public class SummoningManager : MonoBehaviour
         _canvas.gameObject.SetActive(false);
         //Send datas
         QTEManagerDataHandler.SendPatternAndStart(_selectedSummoningData.Pattern);
+        _deckIsOpen = false;
     }
 
     private void OnDisable()

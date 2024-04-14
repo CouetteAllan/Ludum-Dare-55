@@ -9,7 +9,8 @@ public enum CombatPhase
     PickSummoning,
     AllyAttack,
     EnemyAttack,
-    AfterEncounter
+    AfterEncounter,
+    ChosingInDeck,
 }
 
 public class TurnBasedManager : Singleton<TurnBasedManager>
@@ -21,6 +22,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
     [SerializeField] private TextMeshProUGUI _longEncounterText;
 
     public CombatPhase CurrentPhase { get; private set; } = CombatPhase.EnemyAttack;
+    public CombatPhase PreviousPhase { get; private set; } = CombatPhase.EnemyAttack;
 
     protected override void Awake()
     {
@@ -50,6 +52,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         if (newPhase == CurrentPhase)
             return;
 
+        PreviousPhase = CurrentPhase;
         CurrentPhase = newPhase;
         _textDebug.text = newPhase.ToString();
         switch (newPhase)

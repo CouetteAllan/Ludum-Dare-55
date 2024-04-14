@@ -19,12 +19,20 @@ public class CombatManager : MonoBehaviour
     private SpellSO _currentSpell;
 
     private bool _enemyStillHere = true;
+    private bool _deckIsClosed = true;
 
     private void Awake()
     {
         SummoningManagerDataHandler.OnAttackPhase += OnAttackPhase;
         TurnBasedManager.OnChangePhase += TurnBasedManager_OnChangePhase;
         DominationManagerDataHandler.OnDominationComplete += OnDominationComplete;
+        SummoningManagerDataHandler.OnDeckClicked += OnDeckClicked;
+    }
+
+    private void OnDeckClicked()
+    {
+        _deckIsClosed = !_deckIsClosed;
+        OnAttackPhase(_allySummoningData);
     }
 
     private void OnDominationComplete(bool allyVictory)
@@ -47,6 +55,9 @@ public class CombatManager : MonoBehaviour
                 break;
             case CombatPhase.AllyAttack when _allySummoningData != null:
                 OnAttackPhase(_allySummoningData);
+                break;
+            case CombatPhase.ChosingInDeck:
+                QTEManagerDataHandler.OnSendScore -= OnSendScore;
                 break;
         }
     }
@@ -79,17 +90,26 @@ public class CombatManager : MonoBehaviour
     private void OnAttackPhase(SummoningSO summoning)
     {
         //Display spell cards
-        _allySummoningData = summoning;
-        _canva.SetActive(true);
-        _enemyStillHere = true;
-        int index = 0;
-        foreach (var card in _spellCards)
+        if (_deckIsClosed)
         {
-            card.Init(_allySummoningData.Spells[index]);
-            index++;
+            _allySummoningData = summoning;
+            _canva.SetActive(true);
+            _enemyStillHere = true;
+            int index = 0;
+            foreach (var card in _spellCards)
+            {
+                card.Init(_allySummoningData.Spells[index]);
+                index++;
+            }
+            SummoningCardUI.OnClick += SummoningCardUI_OnClick;
+            QTEManagerDataHandler.OnSendScore += OnSendScore;
         }
-        SummoningCardUI.OnClick += SummoningCardUI_OnClick;
-        QTEManagerDataHandler.OnSendScore += OnSendScore;
+        else
+        {
+            _canva.SetActive(false);
+            SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
+            QTEManagerDataHandler.OnSendScore -= OnSendScore;
+        }
 
     }
 
@@ -100,6 +120,7 @@ public class CombatManager : MonoBehaviour
         //Send datas
         SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
         QTEManagerDataHandler.SendPatternAndStart(_currentSpell.Pattern);
+        _deckIsClosed = true;
     }
 
     private void OnDisable()
