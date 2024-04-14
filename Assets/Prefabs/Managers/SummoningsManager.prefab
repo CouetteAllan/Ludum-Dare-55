@@ -118,7 +118,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 134.0635, y: 97.501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7234015789770312185
 CanvasRenderer:
@@ -337,11 +337,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 4283201625009377776}
-  _summoningUIs:
+  _summoningUis:
   - {fileID: 6820831920673185404}
   - {fileID: 355775625005903348}
   - {fileID: 806869216892209944}
   _summoning: {fileID: 0}
+  _Enemy: {fileID: 0}
 --- !u!1 &6935010975688440201
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +492,7 @@ GameObject:
   - component: {fileID: 7884377499784691161}
   - component: {fileID: 2997888566645811158}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PickingSummoningCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,8 +673,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4330790255464421168, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
       propertyPath: m_Name
-      value: SummoningUI
+      value: CardLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 7404622195428416699, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
+      propertyPath: _cardDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ca59a8908954d64192a7a2d6f0068ed, type: 2}
     - target: {fileID: 7404622195428416699, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
       propertyPath: _summoningData
       value: 
@@ -789,8 +794,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4330790255464421168, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
       propertyPath: m_Name
-      value: SummoningUI (1)
+      value: CardCenter
       objectReference: {fileID: 0}
+    - target: {fileID: 7404622195428416699, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
+      propertyPath: _cardDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 489c7a32b1855c04480f0ec8ae3a8642, type: 2}
     - target: {fileID: 7404622195428416699, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
       propertyPath: _summoningData
       value: 
@@ -906,8 +915,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4330790255464421168, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
       propertyPath: m_Name
-      value: SummoningUI (2)
+      value: CardRight
       objectReference: {fileID: 0}
+    - target: {fileID: 7404622195428416699, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
+      propertyPath: _cardDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d08988e4c1a75fd44a32a228be20c399, type: 2}
     - target: {fileID: 7404622195428416699, guid: 0cfdae9b56c8a764ca8b49b06d35938d, type: 3}
       propertyPath: _summoningData
       value: 

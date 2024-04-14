@@ -11,6 +11,6 @@ public class Summoning : MonoBehaviour
     {
         _manager = manager;
         _datas = datas;
-        _sprite.sprite = datas.SummoningImage;
+        _sprite.sprite = datas.CardImage;
     }
 }

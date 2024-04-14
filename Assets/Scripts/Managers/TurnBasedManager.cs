@@ -38,27 +38,33 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
             return;
 
         CurrentPhase = newPhase;
+        _textDebug.text = newPhase.ToString();
         switch (newPhase)
         {
             case CombatPhase.Encounter:
                 //Play Encounter;
-                Invoke("ChangeToPickPhase", 5.0f);
+                Invoke("ChangeToPickPhase", 2.0f);
                 break;
             case CombatPhase.PickSummoning:
                 break;
             case CombatPhase.AllyAttack:
                 break;
             case CombatPhase.EnemyAttack:
+                Invoke("ChangeToAllyPhase", 3.0f);
                 break;
         }
 
-        _textDebug.text = newPhase.ToString();
         OnChangePhase?.Invoke(newPhase);
     }
 
     private void ChangeToPickPhase()
     {
         ChangePhase(CombatPhase.PickSummoning);
+    }
+
+    private void ChangeToAllyPhase()
+    {
+        ChangePhase(CombatPhase.AllyAttack);
     }
 
     private void OnDisable()

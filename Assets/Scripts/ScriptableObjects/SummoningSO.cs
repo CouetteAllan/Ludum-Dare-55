@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "New Summoning",menuName = "Entity/Ally")]
-public class SummoningSO : ScriptableObject
+[CreateAssetMenu (fileName = "New Summoning",menuName = "Card/Summoning")]
+public class SummoningSO : CardSO
 {
-    public string SummoningName;
-    public PatternSO Pattern;
-    public Sprite SummoningImage;
+    [Header("Base Summoning Stat")]
+    public float Damage = 10.0f;
 
-    
+    [Header("Spells")]
+    public SpellSO[] Spells;
 }

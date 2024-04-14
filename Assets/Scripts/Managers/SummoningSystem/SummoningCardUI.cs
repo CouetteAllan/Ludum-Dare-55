@@ -6,24 +6,30 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SummoningUI : MonoBehaviour, IPointerClickHandler
+public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
 {
-    public static event Action<SummoningUI> OnClick;
+    public static event Action<SummoningCardUI> OnClick;
 
-    [SerializeField] private SummoningSO _summoningData;
+    [SerializeField] private CardSO _cardDatas;
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _desc;
     [SerializeField] private GameObject _selectionObject;
 
     public void Init()
     {
-        _image.sprite = _summoningData.SummoningImage;
-        _desc.text = _summoningData.SummoningName;
+        _image.sprite = _cardDatas.CardImage;
+        _desc.text = _cardDatas.CardName;
         _selectionObject.SetActive(false);
-        SummoningUI.OnClick += SummoningUI_OnClick;
+        SummoningCardUI.OnClick += SummoningUI_OnClick;
     }
 
-    private void SummoningUI_OnClick(SummoningUI obj)
+    public void Init(SpellSO spellDatas)
+    {
+        _cardDatas = spellDatas;
+        Init();
+    }
+
+    private void SummoningUI_OnClick(SummoningCardUI obj)
     {
         if (obj == this)
             return;
@@ -38,13 +44,14 @@ public class SummoningUI : MonoBehaviour, IPointerClickHandler
         OnClick?.Invoke(this);
     }
 
-    public SummoningSO GetSummoningDatas()
+    public CardSO GetCardDatas()
     {
-        return _summoningData;
+        return _cardDatas;
     }
 
     public void OnDisable()
     {
-        
+        SummoningCardUI.OnClick -= SummoningUI_OnClick;
+
     }
 }

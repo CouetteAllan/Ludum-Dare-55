@@ -752,17 +752,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2957893318718373312, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6531497211664993911, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
       propertyPath: m_Name
       value: SummoningsManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7415723963587518238, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8640207373290387644, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -883,5 +875,5 @@ SceneRoots:
   - {fileID: 1502133297}
   - {fileID: 1432398397034556566}
   - {fileID: 1920709369646278187}
-  - {fileID: 5914629808603576061}
   - {fileID: 1513451466}
+  - {fileID: 5914629808603576061}

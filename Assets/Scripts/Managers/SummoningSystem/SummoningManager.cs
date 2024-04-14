@@ -5,7 +5,7 @@ using UnityEngine;
 public class SummoningManager : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
-    [SerializeField] private SummoningUI[] _summoningUIs;
+    [SerializeField] private SummoningCardUI[] _summoningUis;
     [Header("Summonings")]
     [SerializeField] private Summoning _summoning;
     [SerializeField] private Summoning _Enemy;
@@ -14,8 +14,6 @@ public class SummoningManager : MonoBehaviour
     private void Awake()
     {
         TurnBasedManager.OnChangePhase += OnChangePhase;
-        SummoningUI.OnClick += SummoningUI_OnClick;
-        QTEManagerDataHandler.OnSendScore += OnSendScore;
     }
 
     private void OnSendScore(Score finalPatternScore)
@@ -25,12 +23,15 @@ public class SummoningManager : MonoBehaviour
         _summoning.gameObject.SetActive(true);
         _summoning.Init(this, _selectedSummoningData);
         TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
+        Invoke("AttackPhase", 2.0f); //2sec delay 
 
     }
 
-    private void SummoningUI_OnClick(SummoningUI obj)
+    private void AttackPhase() => SummoningManagerDataHandler.AttackPhase(_selectedSummoningData);
+
+    private void SummoningUI_OnClick(SummoningCardUI obj)
     {
-        _selectedSummoningData = obj.GetSummoningDatas();
+        _selectedSummoningData = (SummoningSO)obj.GetCardDatas();
     }
 
     private void OnChangePhase(CombatPhase newPhase)
@@ -40,12 +41,19 @@ public class SummoningManager : MonoBehaviour
             OpenSelection();
             _Enemy.transform.position = new Vector2(12, 0);
         }
+        else
+        {
+            QTEManagerDataHandler.OnSendScore -= OnSendScore;
+        }
     }
 
     private void OpenSelection()
     {
+        SummoningCardUI.OnClick += SummoningUI_OnClick;
+        QTEManagerDataHandler.OnSendScore += OnSendScore;
+
         _canvas.gameObject.SetActive(true);
-        foreach (var _summoningUI in _summoningUIs)
+        foreach (var _summoningUI in _summoningUis)
         {
             _summoningUI.Init();
         }
@@ -53,6 +61,7 @@ public class SummoningManager : MonoBehaviour
 
     public void ConfirmSelectSummoning()
     {
+        SummoningCardUI.OnClick -= SummoningUI_OnClick;
         //Close selection Screen
         _canvas.gameObject.SetActive(false);
         //Send datas
@@ -62,8 +71,6 @@ public class SummoningManager : MonoBehaviour
     private void OnDisable()
     {
         TurnBasedManager.OnChangePhase -= OnChangePhase;
-        SummoningUI.OnClick -= SummoningUI_OnClick;
-        QTEManagerDataHandler.OnSendScore -= OnSendScore;
 
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f824b7e8bcbaeee439d074babbea900a, type: 3}
   m_Name: RedPanda
   m_EditorClassIdentifier: 
-  SummoningName: Red Panda
+  CardName: The Gentle Red Panda
   Pattern: {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
-  SummoningImage: {fileID: 21300000, guid: b3399d2d2ac833a4d8cd38617fa769cc, type: 3}
-  MaxHealth: 5
+  CardImage: {fileID: 21300000, guid: b3399d2d2ac833a4d8cd38617fa769cc, type: 3}
   Damage: 20
+  Spells: []
