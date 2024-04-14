@@ -34,8 +34,20 @@ public class CombatManager : MonoBehaviour
     private void OnSendScore(Score finalScore)
     {
         //DoAttack
+        if (finalScore.accuracy > 80.0f)
+            SummoningManagerDataHandler.AllySummoningAttack(finalScore, _currentSpell, EndAllyTurn);
+        else
+        {
+            Debug.Log("AttackMissed");
+            EndAllyTurn();
+        }
         //Do HealthChange
+    }
+
+    private void EndAllyTurn()
+    {
         TurnBasedManager.Instance.ChangePhase(CombatPhase.EnemyAttack);
+
     }
 
     private void SummoningCardUI_OnClick(SummoningCardUI card)
