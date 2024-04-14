@@ -476,7 +476,6 @@ MonoBehaviour:
   - {fileID: 355775625005903348}
   - {fileID: 806869216892209944}
   _summoning: {fileID: 0}
-  _Enemy: {fileID: 0}
 --- !u!1 &6935010975688440201
 GameObject:
   m_ObjectHideFlags: 0

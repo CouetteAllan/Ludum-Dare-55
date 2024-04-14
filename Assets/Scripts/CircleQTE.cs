@@ -45,9 +45,9 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         _hasBeenClicked = true;
         
         if (!_manager.IsDrawing)
-            _manager.StartDrawing(cam.ScreenToWorldPoint(this.transform.position));
+            _manager.StartDrawing(this.transform.position);
         else
-            _manager.AddPointToLine(cam.ScreenToWorldPoint(this.transform.position));
+            _manager.AddPointToLine(this.transform.position);
 
         _manager.SetPreviousIndex(_index);
 
@@ -90,15 +90,15 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         switch (absTime)
         {
             case < .05f:
-                var perfectParticles = Instantiate(_particleSystemsFeedback[2], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
+                var perfectParticles = Instantiate(_particleSystemsFeedback[2], this.transform.position + Vector3.forward * -3.0f, Quaternion.identity);
                 perfectParticles.Play();
                 return PrecisionState.Perfect;
             case < .25f:
-                var goodParticle = Instantiate(_particleSystemsFeedback[0], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
+                var goodParticle = Instantiate(_particleSystemsFeedback[0], this.transform.position + Vector3.forward * -3.0f, Quaternion.identity);
                 goodParticle.Play();
                 return PrecisionState.Good;
             default:
-                var missedParticles = Instantiate(_particleSystemsFeedback[1], Utils.MainCamera.ScreenToWorldPoint(this.transform.position + Vector3.forward * 10.0f), Quaternion.identity);
+                var missedParticles = Instantiate(_particleSystemsFeedback[1], this.transform.position + Vector3.forward * -3.0f, Quaternion.identity);
                 missedParticles.Play();
                 return PrecisionState.Missed;
         }

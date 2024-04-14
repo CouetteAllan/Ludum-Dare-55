@@ -91,7 +91,10 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
 
     public void ChangeToEncounter()
     {
-        ChangePhase(CombatPhase.Encounter);
+        if(CurrentPhase == CombatPhase.AfterEncounter)
+            ChangePhase(CombatPhase.BeforeEncounter);
+        else
+            ChangePhase(CombatPhase.Encounter);
     }
 
     private void ChangeToAfterEncounter()

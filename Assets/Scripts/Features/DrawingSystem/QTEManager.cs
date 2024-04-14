@@ -50,6 +50,7 @@ public class QTEManager : MonoBehaviour
     private void SpawnPattern()
     {
         _canvas.gameObject.SetActive(true);
+        _canvas.worldCamera = Utils.MainCamera;
         this.StartSpawnPattern();
         
 
@@ -82,6 +83,7 @@ public class QTEManager : MonoBehaviour
         }
 
         QTEManagerDataHandler.PatternFinished();
+        _canvas.gameObject.SetActive(false);
     }
 
     public void RemoveCircle(CircleQTE circle)
