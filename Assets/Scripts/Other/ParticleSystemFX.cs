@@ -8,9 +8,10 @@ public class ParticleSystemFX : MonoBehaviour
 
     private Action _callBackMethodOnFinished;
 
-    public void Init(Action onFinishiedParticleSystem)
+    public void InitAndPlayParticle(Action onFinishiedParticleSystem)
     {
         _callBackMethodOnFinished = onFinishiedParticleSystem;
+        this.gameObject.GetComponent<ParticleSystem>().Play();
     }
 
     private void OnParticleSystemStopped()

@@ -8,6 +8,7 @@ public class Summoning : MonoBehaviour
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private bool _isAlly;
     [SerializeField] private Animator _animator;
+    [SerializeField] private ParticleSystemFX _particleSystemFX;
 
     private SummoningManager _manager;
     private SummoningSO _datas;
@@ -16,9 +17,15 @@ public class Summoning : MonoBehaviour
     public void Init(SummoningManager manager, SummoningSO datas)
     {
         _manager = manager;
-        _datas = datas;
         _sprite.sprite = datas.CardImage;
+        _sprite.color = new Color(1, 1, 1, 0);
+        _datas = datas;
         SummoningManagerDataHandler.OnAllySummoningAttack += OnAllySummoningAttack;
+        _particleSystemFX.InitAndPlayParticle(() => 
+        {
+            _sprite.color = new Color(1, 1, 1, 1);
+            _manager.AttackPhase(2.0f);
+        });
     }
 
     public void ChangeSummonning()

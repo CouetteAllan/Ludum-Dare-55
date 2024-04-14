@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum Affinity
 {
+    VeryWeak,
     Weak,
     Neutral,
     Good,

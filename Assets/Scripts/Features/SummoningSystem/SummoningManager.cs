@@ -23,11 +23,20 @@ public class SummoningManager : MonoBehaviour
         _summoning.Init(this, _selectedSummoningData);
         TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
         //2sec delay 
-        Invoke("AttackPhase", 2.0f);
 
     }
 
-    private void AttackPhase() => SummoningManagerDataHandler.AttackPhase(_selectedSummoningData);
+    public void AttackPhase(float delay = 0)
+    {
+        StartCoroutine(DelayAttack(delay));
+    }
+
+    private IEnumerator DelayAttack(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SummoningManagerDataHandler.AttackPhase(_selectedSummoningData);
+    }
+
 
     private void SummoningUI_OnClick(SummoningCardUI obj)
     {

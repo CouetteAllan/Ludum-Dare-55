@@ -323,7 +323,7 @@ MonoBehaviour:
   _pattern: {fileID: 0}
   _canvas: {fileID: 8821609222551970389}
   _line: {fileID: 8096297055791535118}
-  _circleDuration: 1
+  _circleDuration: 1.2
   _circleInterval: 0.8
 --- !u!114 &5489477703544238779
 MonoBehaviour:
