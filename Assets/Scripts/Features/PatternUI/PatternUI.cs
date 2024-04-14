@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class PatternUI : MonoBehaviour
 {
-    [Range (0f,1f)]
-    [SerializeField] private float _amount = 1f;
-    [SerializeField] private PatternSO _pattern;
-
     [Header("UI sub-components")]
     [SerializeField] private RadialBar _radialBar;
     [SerializeField] private PatternLineRenderer _patternLineRenderer;
 
-    private void Start()
+    public void SetPattern(PatternSO pattern)
     {
-        _patternLineRenderer.SetPattern(_pattern);
+        _patternLineRenderer.SetPattern(pattern);
     }
 
-    private void Update()
+    public void SetAmount(float amount)
     {
-        _radialBar.Amount = _amount;
+        _radialBar.Amount = amount;
     }
 
 }

@@ -1132,9 +1132,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 806869216892209944, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
+      propertyPath: _health
+      value: 0.212
+      objectReference: {fileID: 0}
     - target: {fileID: 6531497211664993911, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
       propertyPath: m_Name
       value: SummoningsManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820831920673185404, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
+      propertyPath: _health
+      value: 0.642
       objectReference: {fileID: 0}
     - target: {fileID: 8640207373290387644, guid: a3e3b4ccf99b21f429326ac270584ed4, type: 3}
       propertyPath: m_LocalPosition.x

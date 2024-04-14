@@ -14,12 +14,19 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _desc;
     [SerializeField] private GameObject _selectionObject;
+    [SerializeField] private PatternUI _patternUI;
+
+    // should not be assigned in the inspector but I put it here until we plug the real health data
+    [Range(0f,1f)]
+    [SerializeField] private float _health = 1f;
 
     public void Init()
     {
         _image.sprite = _cardDatas.CardImage;
         _desc.text = _cardDatas.CardName;
         _selectionObject.SetActive(false);
+        _patternUI.SetPattern(_cardDatas.Pattern);
+        _patternUI.SetAmount(_health);
         SummoningCardUI.OnClick += SummoningUI_OnClick;
     }
 
