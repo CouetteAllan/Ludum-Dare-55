@@ -47,9 +47,9 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         }
     }
 
-    public void ChangePhase(CombatPhase newPhase)
+    public void ChangePhase(CombatPhase newPhase,bool forceChange = false)
     {
-        if (newPhase == CurrentPhase)
+        if (newPhase == CurrentPhase && !forceChange)
             return;
 
         PreviousPhase = CurrentPhase;

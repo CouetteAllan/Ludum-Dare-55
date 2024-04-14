@@ -35,7 +35,7 @@ public class SummoningManager : MonoBehaviour
         _summoning.gameObject.SetActive(true);
         Debug.Log("Init ALly");
         _summoning.Init(this, _selectedSummoningData);
-        TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
+        TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack,true);
         //2sec delay 
 
     }
@@ -63,14 +63,22 @@ public class SummoningManager : MonoBehaviour
         _deckCanvas.gameObject.SetActive(newPhase == CombatPhase.AllyAttack || newPhase == CombatPhase.ChosingInDeck);
         if(newPhase == CombatPhase.PickSummoning)
         {
+            _deckCanvas.gameObject.SetActive(false);
             _summoning.ChangeSummonning();
             _summoning.gameObject.SetActive(false);
-            _deckCanvas.gameObject.SetActive(false);
+            OpenSelection(true);
+        }
+        else if(newPhase == CombatPhase.ChosingInDeck)
+        {
+            _summoning.ChangeSummonning();
+            _summoning.gameObject.SetActive(false);
             OpenSelection(true);
         }
         else
         {
             QTEManagerDataHandler.OnSendScore -= OnSendScore;
+            SummoningCardUI.OnClick -= SummoningUI_OnClick;
+
         }
     }
 

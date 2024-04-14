@@ -42,14 +42,17 @@ public class CombatManager : MonoBehaviour
 
     private void TurnBasedManager_OnChangePhase(CombatPhase newPhase)
     {
+        _deckIsClosed = true;
         switch (newPhase)
         {
             case CombatPhase.PickSummoning:
                 _enemyStillHere = true;
                 _allySummoningData = null;
                 QTEManagerDataHandler.OnSendScore -= OnSendScore;
+                SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
                 break;
             case CombatPhase.EnemyAttack:
+                SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
                 QTEManagerDataHandler.OnSendScore -= OnSendScore;
                 _enemyStillHere = true;
                 break;
@@ -58,6 +61,8 @@ public class CombatManager : MonoBehaviour
                 break;
             case CombatPhase.ChosingInDeck:
                 QTEManagerDataHandler.OnSendScore -= OnSendScore;
+                SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
+                _deckIsClosed = false;
                 break;
         }
     }
