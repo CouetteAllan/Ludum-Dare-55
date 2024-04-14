@@ -9,9 +9,10 @@ public class DominationManager : MonoBehaviour
     [SerializeField] private RectTransform _dominationBarParent;
     [SerializeField] private Image _candleGO;
     [SerializeField] private Sprite[] _candleImages = new Sprite[2];
-    private EnemySO currentEnemyData;
-    private int _remainingCandles = 5;
-    private int _evilCandles = 5;
+    private EnemySO _currentEnemyData;
+    private float _progressPercent = .5f;
+
+    private List<Image> _candles = new List<Image>();
 
     private void Awake()
     {
@@ -19,38 +20,49 @@ public class DominationManager : MonoBehaviour
         DominationManagerDataHandler.OnUpdateDominationBar += OnUpdateDominationBar;
     }
 
-    private void OnUpdateDominationBar(int candleChangeNb)
+    private void OnUpdateDominationBar(float dominationPercentChange)
     {
-        _remainingCandles += candleChangeNb;
+        _progressPercent = Mathf.Clamp(_progressPercent + dominationPercentChange,0.0f,1.0f);
+
         //Update visuals
-        RefreshCandles(_remainingCandles);
+        RefreshCandles(_progressPercent);
     }
 
     private void OnInitEnemy(EnemySO currentEnemyData)
     {
-        _remainingCandles = _maxCandle - currentEnemyData.StartDomination;
-        _evilCandles = _maxCandle - _remainingCandles;
-
-        RefreshCandles(_remainingCandles);
+        _progressPercent = 1.0f - currentEnemyData.StartDominationInPercent;
+        InitProgressBar();
 
     }
 
-    private void RefreshCandles(int remainingCandles)
+    private void InitProgressBar()
     {
-        foreach (var child in _dominationBarParent.GetComponentsInChildren<Image>())
-        {
-            Destroy(child.gameObject);
-        }
+        Debug.Log("Init Progress");
+        int remainingCandles = Mathf.FloorToInt(_progressPercent * _maxCandle);
+        int evilCandles = _maxCandle - remainingCandles;
 
         for (int i = 0; i < remainingCandles; i++)
         {
-            Image candleImage = Instantiate(_candleGO, _dominationBarParent);
-            candleImage.sprite = _candleImages[0];
+            Image candle = Instantiate(_candleGO, _dominationBarParent);
+            candle.sprite = _candleImages[0];
+            _candles.Add(candle);
         }
-        for (int i = 0; i < _maxCandle - remainingCandles; i++)
+        for (int i = 0; i < evilCandles; i++)
         {
-            Image candleImage = Instantiate(_candleGO, _dominationBarParent);
-            candleImage.sprite = _candleImages[1];
+            Image candle = Instantiate(_candleGO, _dominationBarParent);
+            candle.sprite = _candleImages[1];
+            _candles.Add(candle);
+        }
+    }
+
+    private void RefreshCandles(float remainingCandlesInPercent)
+    {
+        int remainingCandles = Mathf.FloorToInt(remainingCandlesInPercent * _maxCandle);
+        int evilCandles = _maxCandle - remainingCandles;
+
+        for (int i = 0; i < _maxCandle; i++)
+        {
+            _candles[i].sprite = i < remainingCandles ? _candleImages[0] : _candleImages[1];
         }
     }
 

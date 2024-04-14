@@ -15,5 +15,5 @@ MonoBehaviour:
   CardName: The Gentle Red Panda
   Pattern: {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
   CardImage: {fileID: 21300000, guid: b3399d2d2ac833a4d8cd38617fa769cc, type: 3}
-  Damage: 20
+  Health: 5
   Spells: []

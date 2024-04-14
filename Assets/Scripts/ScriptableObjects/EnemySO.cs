@@ -16,7 +16,7 @@ public class EnemySO : ScriptableObject
     public string EnemyFullName;
     public EnemyType EnemyName;
     public Sprite EnemyImage;
-    [Range(2,9)]public int StartDomination = 5;
+    [Range(0.1f,0.9f)]public float StartDominationInPercent = .5f;
 
     public string[] AttackNames = new string[2];
 }

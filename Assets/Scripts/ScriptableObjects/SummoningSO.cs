@@ -6,7 +6,7 @@ using UnityEngine;
 public class SummoningSO : CardSO
 {
     [Header("Base Summoning Stat")]
-    public float Damage = 10.0f;
+    [Range(1,10)] public int Health = 5;
 
     [Header("Spells")]
     public SpellSO[] Spells;

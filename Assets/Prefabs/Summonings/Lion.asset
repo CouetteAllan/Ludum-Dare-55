@@ -15,7 +15,7 @@ MonoBehaviour:
   CardName: The Mighty Lion
   Pattern: {fileID: 11400000, guid: 90c294eea2de6764592644f0ce7107c9, type: 2}
   CardImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
-  Damage: 20
+  Health: 5
   Spells:
   - {fileID: 11400000, guid: 9d3f3e431a244e14f9c8f0bb81c6ac71, type: 2}
   - {fileID: 11400000, guid: adf841efed993a542a9f23922bfafd95, type: 2}

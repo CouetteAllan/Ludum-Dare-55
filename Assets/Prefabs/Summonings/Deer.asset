@@ -15,5 +15,6 @@ MonoBehaviour:
   CardName: The Calmly Deer
   Pattern: {fileID: 11400000, guid: 78bc5e9626456a345a77daeac6ee6b17, type: 2}
   CardImage: {fileID: 21300000, guid: bef32850665d213489d2225075c9a202, type: 3}
-  Damage: 20
-  Spells: []
+  Health: 5
+  Spells:
+  - {fileID: 11400000, guid: e63633ae1ce395c43aa976385a2146b1, type: 2}

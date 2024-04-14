@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyFullName: Frankie The Ashamed
   EnemyName: 0
   EnemyImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
-  StartDomination: 5
+  StartDomination: 10
   AttackNames:
   - Guilt Trip
   - Gaslight

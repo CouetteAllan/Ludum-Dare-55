@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatternName: Pentagram
   PatternPrefabs:
-  - {fileID: 8683889172735665238, guid: 43e7f76c9798cc244a2ad4f362d1afbd, type: 3}
+  - {fileID: 8683889172735665238, guid: 8d64f132a6867344a8956a9909cb48ed, type: 3}

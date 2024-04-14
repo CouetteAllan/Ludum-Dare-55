@@ -25,7 +25,7 @@ public class CombatManager : MonoBehaviour
 
     private void TurnBasedManager_OnChangePhase(CombatPhase newPhase)
     {
-        if (newPhase == CombatPhase.PickSummoning)
+        if (newPhase == CombatPhase.PickSummoning || newPhase == CombatPhase.EnemyAttack)
             QTEManagerDataHandler.OnSendScore -= OnSendScore;
         else if (newPhase == CombatPhase.AllyAttack && _allySummoningData != null)
             OnAttackPhase(_allySummoningData);

@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 589ea0d2f073c7f45b8c10b53be762cd, type: 3}
-  m_Name: Vadim
+  m_Script: {fileID: 11500000, guid: 822ad61c98551aa459410197d9fa3f2c, type: 3}
+  m_Name: LionSpellPattern
   m_EditorClassIdentifier: 
-  EnemyFullName: Vadim The Hater
-  EnemyName: 2
-  EnemyImage: {fileID: 0}
-  StartDominationInPercent: 0.8
-  AttackNames:
-  - Roast
-  - Insult
+  PatternName: Brave
+  PatternPrefabs:
+  - {fileID: 8683889172735665238, guid: 43e7f76c9798cc244a2ad4f362d1afbd, type: 3}

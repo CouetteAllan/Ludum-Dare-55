@@ -18,6 +18,6 @@ public class Enemy : MonoBehaviour
     public void EnemyAttack()
     {
         _animator.SetTrigger("Attack");
-        DominationManagerDataHandler.UpdateDominationBar(-1);
+        DominationManagerDataHandler.UpdateDominationBar(-.1f);
     }
 }

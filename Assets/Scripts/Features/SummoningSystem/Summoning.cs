@@ -34,7 +34,8 @@ public class Summoning : MonoBehaviour
         //Do anim attack
         _animator.SetTrigger("Attack");
         //Do damage and change progress bar
-        DominationManagerDataHandler.UpdateDominationBar(+2);
+
+        DominationManagerDataHandler.UpdateDominationBar(.2f);
     }
 
     public void FinishedAnime()

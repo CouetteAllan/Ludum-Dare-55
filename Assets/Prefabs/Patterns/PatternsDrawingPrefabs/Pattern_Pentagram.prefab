@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8082116018830167285}
   m_Layer: 5
-  m_Name: Pattern_Pentagramme
+  m_Name: Pattern_Pentagram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

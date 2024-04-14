@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemyFullName: Noor The Anxious
   EnemyName: 1
   EnemyImage: {fileID: 21300000, guid: bef32850665d213489d2225075c9a202, type: 3}
-  StartDomination: 6
+  StartDominationInPercent: 0.6
   AttackNames:
   - Failure
   - Gaze of a thousand
