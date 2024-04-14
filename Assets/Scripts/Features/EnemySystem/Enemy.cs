@@ -12,10 +12,12 @@ public class Enemy : MonoBehaviour
     {
         _datas = datas;
         _sprite.sprite = datas.EnemyImage;
+        EnemyManagerDataHandler.InitEnemy(datas);
     }
 
     public void EnemyAttack()
     {
         _animator.SetTrigger("Attack");
+        DominationManagerDataHandler.UpdateDominationBar(-1);
     }
 }
