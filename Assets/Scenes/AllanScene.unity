@@ -1369,6 +1369,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ally
       objectReference: {fileID: 0}
+    - target: {fileID: 1019901188317966383, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038588155083215388, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: CustomDataModule.mode0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038588155083215388, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: CustomDataModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8006327636577685970, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.4
