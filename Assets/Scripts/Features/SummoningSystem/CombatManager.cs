@@ -57,7 +57,7 @@ public class CombatManager : MonoBehaviour
                 break;
             case CombatPhase.AllyAttack when _allySummoningData != null:
                 Debug.Log("Ally phase is called");
-                OnAttackPhase(_allySummoningData);
+                OnAttackPhase();
                 break;
             case CombatPhase.ChosingInDeck:
                 QTEManagerDataHandler.OnSendScore -= OnSendScore;
@@ -94,7 +94,7 @@ public class CombatManager : MonoBehaviour
         _currentSpell = (SpellSO)card.GetCardDatas();
     }
 
-    private void OnAttackPhase(SummoningSO summoning)
+    private void OnAttackPhase()
     {
         //Display spell cards
         if (_deckIsClosed)

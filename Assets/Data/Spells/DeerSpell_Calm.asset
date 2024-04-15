@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: 
   Pattern: {fileID: 11400000, guid: 78bc5e9626456a345a77daeac6ee6b17, type: 2}
-  CardImage: {fileID: 0}
+  CardImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
   FrankieAffinity: 0
   NoorAffinity: 0
   VadimAffinity: 0

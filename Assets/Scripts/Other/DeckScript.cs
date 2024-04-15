@@ -5,9 +5,11 @@ using UnityEngine.EventSystems;
 
 public class DeckScript : MonoBehaviour, IPointerClickHandler
 {
+    public bool _backButton;
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        SummoningManagerDataHandler.DeckClicked();
+        SummoningManagerDataHandler.DeckClicked(!_backButton);
         //Play feedback
     }
 }
