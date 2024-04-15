@@ -18,3 +18,6 @@ MonoBehaviour:
   Health: 5
   Spells:
   - {fileID: 11400000, guid: e63633ae1ce395c43aa976385a2146b1, type: 2}
+  - {fileID: 11400000, guid: a0d18ac62807f484b9eefeda7c221a62, type: 2}
+  - {fileID: 11400000, guid: bd861b13e42e8334aaa4561e21ea9913, type: 2}
+  type: 1

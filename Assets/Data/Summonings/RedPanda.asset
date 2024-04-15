@@ -16,4 +16,8 @@ MonoBehaviour:
   Pattern: {fileID: 11400000, guid: 88a9aaf9f30b38a4bace083b87d5a6ad, type: 2}
   CardImage: {fileID: 21300000, guid: b3399d2d2ac833a4d8cd38617fa769cc, type: 3}
   Health: 5
-  Spells: []
+  Spells:
+  - {fileID: 11400000, guid: 1f0e1870a6a40294c974ea450a92f422, type: 2}
+  - {fileID: 11400000, guid: 2aa6667ecb4526e4481deff5731f371c, type: 2}
+  - {fileID: 11400000, guid: 52b5c77c5c27c48419c1b25b1472b679, type: 2}
+  type: 2

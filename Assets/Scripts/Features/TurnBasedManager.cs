@@ -24,11 +24,25 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
     public CombatPhase CurrentPhase { get; private set; } = CombatPhase.EnemyAttack;
     public CombatPhase PreviousPhase { get; private set; } = CombatPhase.EnemyAttack;
 
+    private bool _allyIsAlive = true;
+
     protected override void Awake()
     {
         base.Awake();
         GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
         DominationManagerDataHandler.OnDominationComplete += OnDominationComplete;
+        SummoningManagerDataHandler.OnAllySummoningDies += OnAllySummoningDies;
+        SummoningManagerDataHandler.OnAllySummoningSpawn += OnAllySummoningSpawn;
+    }
+
+    private void OnAllySummoningSpawn(SummoningSO datas)
+    {
+        _allyIsAlive = true;
+    }
+
+    private void OnAllySummoningDies()
+    {
+        _allyIsAlive = false;
     }
 
     private void OnDominationComplete(bool allyVictory)
@@ -52,6 +66,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         if (newPhase == CurrentPhase && !forceChange)
             return;
 
+        var temp = PreviousPhase;
         PreviousPhase = CurrentPhase;
         CurrentPhase = newPhase;
         _textDebug.text = newPhase.ToString();
@@ -59,6 +74,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
         {
             case CombatPhase.BeforeEncounter:
                 _encounterCanvas.gameObject.SetActive(true);
+                _allyIsAlive = true;
                 break;
             case CombatPhase.Encounter:
                 //Play Encounter;
@@ -69,7 +85,13 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
                 break;
             case CombatPhase.AllyAttack:
                 //If ally stil alive, keepgoing
-
+                if (!_allyIsAlive)
+                {
+                    CurrentPhase = PreviousPhase;
+                    _textDebug.text = PreviousPhase.ToString();
+                    PreviousPhase = temp;
+                    return;
+                }
                 break;
             case CombatPhase.EnemyAttack:
                 //If Enemy stil alive, keepgoing
@@ -109,6 +131,9 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
     private void OnDisable()
     {
         GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+        DominationManagerDataHandler.OnDominationComplete -= OnDominationComplete;
+        SummoningManagerDataHandler.OnAllySummoningDies -= OnAllySummoningDies;
+        SummoningManagerDataHandler.OnAllySummoningSpawn -= OnAllySummoningSpawn;
 
     }
 }

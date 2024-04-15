@@ -32,6 +32,7 @@ public class Summoning : MonoBehaviour
             _battleResults = _datas.GetResults();
 
         EnemyManagerDataHandler.OnEnemyAttack += OnEnemyAttack;
+        SummoningManagerDataHandler.AllySummoningSpawn(this._datas);
     }
 
     private void OnEnemyAttack(EnemySO enemyDatas)
@@ -67,7 +68,9 @@ public class Summoning : MonoBehaviour
     public void ChangeSummonning()
     {
         SummoningManagerDataHandler.OnAllySummoningAttack -= OnAllySummoningAttack;
+        EnemyManagerDataHandler.OnEnemyAttack -= OnEnemyAttack;
         _datas = null;
+        _battleResults = null;
         this.gameObject.SetActive(false);
     }
 

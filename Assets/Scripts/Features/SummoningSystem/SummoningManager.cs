@@ -22,8 +22,7 @@ public class SummoningManager : MonoBehaviour
 
     private void OnAllySummoningDies()
     {
-        _summoning.ChangeSummonning();
-        TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning);
+        TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning,true);
     }
 
     private void OnDeckClicked()
