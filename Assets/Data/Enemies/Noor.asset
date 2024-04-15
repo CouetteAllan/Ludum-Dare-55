@@ -17,22 +17,20 @@ MonoBehaviour:
   EnemyImage: {fileID: 21300000, guid: 63eef05488a0c914f9df06b1355f95c2, type: 3}
   StartDominationInPercent: 0.6
   BaseDamage: 0.2
-  BonusDamageAgainstLion: 0.5
-  BonusDamageAgainstDeer: 0
-  BonusDamageAgainstRedPanda: 0
+  BonusDamageAgainstLion: -0.1
+  BonusDamageAgainstDeer: 0.1
+  BonusDamageAgainstRedPanda: 0.1
   AttackNames:
   - Failure
   - Gaze of a thousand
-  PreEncounter: I found her too. She seems completely curled up on herself, trembling,
-    and a moan escapes from her mouth. From her emanates an aura drowned by the stress
-    and anxiety which completely invaded her, and transformed her into a ravaged
-    and dangerous soul, for others but especially for herself.
-  PostEncounter: 'Her stress, her thoughts and the gaze of a thousand people that
+  PreEncounter: "\tI found her too. She seems completely curled up on herself, trembling,
+    and a moan escapes from her mouth.\n\t\n\t From her emanates an aura drowned
+    by the stress and anxiety which completely invaded her, and transformed her into
+    a ravaged and dangerous soul, for others but especially for herself."
+  PostEncounter: "\tHer stress, her thoughts and the gaze of a thousand people that
     invaded her fell on me. I heard her anxieties, her fears. I saw everyone pointing
     their accusing looks at me.  I understood the distress in which she was. She
-    was drowned by this unstoppable wave of worries.
-
-    I was able to invoke my
+    was drowned by this unstoppable wave of worries.\n\n\tI was able to invoke my
     faithful companions, and we helped her to overcome the anxiety that was overwhelming
     her and to reassure her fears. The work on herself remains important, but she
-    is out of the woods.'
+    is out of the woods."

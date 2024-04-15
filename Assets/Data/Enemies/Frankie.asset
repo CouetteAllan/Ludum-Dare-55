@@ -16,18 +16,20 @@ MonoBehaviour:
   EnemyName: 0
   EnemyImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
   StartDominationInPercent: 0.5
+  BaseDamage: 0.2
+  BonusDamageAgainstLion: 0
+  BonusDamageAgainstDeer: 0
+  BonusDamageAgainstRedPanda: -0.1
   AttackNames:
   - Guilt Trip
   - Gaslight
-  PreEncounter: He is there, in front of me. I found this damned soul, overwhelmed
-    by shame and guilt. From him emanates an aggressive aura, which his self-punishments
+  PreEncounter: "\tHe is there, in front of me. I found this damned soul, overwhelmed
+    by shame and guilt. \n\t\n\tFrom him emanates an aggressive aura, which his self-punishments
     had transformed into a ravaged and dangerous soul, for others but especially
-    for himself.
-  PostEncounter: 'His fears and accusations fell on me and I understood the distress
+    for himself."
+  PostEncounter: "\tHis fears and accusations fell on me and I understood the distress
     in which he was. I heard the remarks he had experienced, I saw the shame of his
-    mistakes and his decisions. He had been devoured by this feeling of having caused
-    misfortune to the world.
-
-    I was able to invoke my faithful companions, and
-    we helped him to overcome and calm this shame which invaded him. The work on
-    himself remains important, but he is out of the woods.'
+    mistakes and his decisions.\n\t He had been devoured by this feeling of having
+    caused misfortune to the world.I was able to invoke my faithful companions, and
+    we helped him to overcome and calm this shame which invaded him. \n\t\n\tThe
+    work on himself remains important, but he is out of the woods."

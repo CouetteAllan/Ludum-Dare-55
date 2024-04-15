@@ -4872,7 +4872,7 @@ GameObject:
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8006327636577685970
 Transform:
   m_ObjectHideFlags: 0
@@ -4905,7 +4905,6 @@ MonoBehaviour:
   _animator: {fileID: 8736666816634822234}
   _particleSystemFX: {fileID: 1512513721346035517}
   _spawnParticleSystemFX: {fileID: 6446203252132798161}
-  _dieParticleSystemFX: {fileID: 0}
 --- !u!212 &8277406607810222972
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5095,7 +5094,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 2.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2

@@ -75,6 +75,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
             case CombatPhase.BeforeEncounter:
                 _encounterCanvas.gameObject.SetActive(true);
                 _allyIsAlive = true;
+                EnemyManagerDataHandler.RegisterEncounterText(_longEncounterText);
                 break;
             case CombatPhase.Encounter:
                 //Play Encounter;
@@ -98,6 +99,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
                 break;
             case CombatPhase.AfterEncounter:
                 _encounterCanvas.gameObject.SetActive(true);
+                EnemyManagerDataHandler.RegisterEncounterText(_longEncounterText);
                 break;
         }
 

@@ -432,8 +432,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: E
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 275667583753bc04f834aba27e9e268d, type: 2}
+  m_sharedMaterial: {fileID: 3438913362101326971, guid: 275667583753bc04f834aba27e9e268d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 62.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -684,7 +684,7 @@ MonoBehaviour:
   _isPersistant: 0
   _textDebug: {fileID: 7384685762546127079}
   _encounterCanvas: {fileID: 1021311336661492501}
-  _longEncounterText: {fileID: 2385282524621382350}
+  _longEncounterText: {fileID: 1839801140791098643}
 --- !u!114 &6466253948921886528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,8 +891,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Current Combat Phase:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 275667583753bc04f834aba27e9e268d, type: 2}
+  m_sharedMaterial: {fileID: 3438913362101326971, guid: 275667583753bc04f834aba27e9e268d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -916,7 +916,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.4
+  m_fontSize: 33.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1236,8 +1236,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 275667583753bc04f834aba27e9e268d, type: 2}
+  m_sharedMaterial: {fileID: 3438913362101326971, guid: 275667583753bc04f834aba27e9e268d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1556,7 +1556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3763406915395207297
 RectTransform:
   m_ObjectHideFlags: 0

@@ -16,18 +16,21 @@ MonoBehaviour:
   EnemyName: 2
   EnemyImage: {fileID: 21300000, guid: 6ec4a3f3ea05cd84494868a784c01191, type: 3}
   StartDominationInPercent: 0.8
+  BaseDamage: 0.2
+  BonusDamageAgainstLion: 0.2
+  BonusDamageAgainstDeer: -0.1
+  BonusDamageAgainstRedPanda: 0.1
   AttackNames:
   - Roast
   - Insult
-  PreEncounter: This time, he found me. He came upon me, overcome by anger and devoured
-    by hatred. Emanates an aggressive and violent aura from him, and all this negative
-    energy has completely devoured him, transforming him into a violent and dangerous
-    soul, for others and for himself.
-  PostEncounter: 'His hatred and anger came to me in fury. They attacked relentlessly
+  PreEncounter: "\tThis time, he found me. He came upon me, overcome by anger and
+    devoured by hatred.\n\t Emanates an aggressive and violent aura from him, and
+    all this negative energy has completely devoured him, transforming him into a
+    violent and dangerous soul, for others and for himself."
+  PostEncounter: "\tHis hatred and anger came to me in fury. They attacked relentlessly
     with all the insults and mockery that had invaded him, and I might have detected
     that all these criticisms and judgments were in fact the masks of his pain and
-    fears. And then I understood how he had allowed himself to be devoured by hatred.
-
-    I
-    was able to summon my faithful companions, and we helped him ease his pain and
-    reason his fears. The work on itself remains important, but it is a first step.'
+    fears.\n\t And then I understood how he had allowed himself to be devoured by
+    hatred.\n\tI was able to summon my faithful companions, and we helped him ease
+    his pain and reason his fears. The work on itself remains important, but it is
+    a first step."

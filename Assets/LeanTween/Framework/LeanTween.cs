@@ -144,6 +144,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 public enum TweenAction{
     MOVE_X,
@@ -1161,6 +1162,18 @@ public class LeanTween : MonoBehaviour {
     */  
     public static LTDescr textAlpha(RectTransform rectTransform, float to, float time){
         return pushNewTween(rectTransform.gameObject, new Vector3(to,0,0), time, options().setTextAlpha());
+    }
+
+    public static LTDescr LeanAlphaText(TextMeshProUGUI textMesh, float to, float time)
+    {
+        var _color = textMesh.color;
+        var _tween = LeanTween
+            .value(textMesh.gameObject, _color.a, to, time)
+            .setOnUpdate((float _value) => {
+                _color.a = _value;
+                textMesh.color = _color;
+            });
+        return _tween;
     }
     public static LTDescr alphaText(RectTransform rectTransform, float to, float time){
         return pushNewTween(rectTransform.gameObject, new Vector3(to,0,0), time, options().setTextAlpha());
