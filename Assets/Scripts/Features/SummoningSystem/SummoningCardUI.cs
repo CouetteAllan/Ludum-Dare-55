@@ -29,7 +29,7 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
         _selectionObject.SetActive(false);
         _patternUI.SetPattern(_cardDatas.Pattern);
         _patternUI.SetAmount(_health);
-        if (_cardDatas.Equals(typeof(SummoningSO)))
+        if (_cardDatas is SummoningSO)
         {
             SummoningSO summoningDatas = _cardDatas as SummoningSO;
             _battleResult = summoningDatas.GetResults();
