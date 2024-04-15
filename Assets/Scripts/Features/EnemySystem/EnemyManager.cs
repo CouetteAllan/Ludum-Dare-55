@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
             case CombatPhase.Encounter:
                 _enemy.gameObject.SetActive(true);
                 _enemy.transform.position = Vector3.zero;
-                _enemy.Init(_enemies[_indexEncounter]);
+                _enemy.Init(_enemies[_indexEncounter],this);
                 _indexEncounter++;
                 break;
             case CombatPhase.PickSummoning:

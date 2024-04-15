@@ -30,7 +30,39 @@ public class Summoning : MonoBehaviour
         });
         if(_battleResults == null)
             _battleResults = _datas.GetResults();
+
+        EnemyManagerDataHandler.OnEnemyAttack += OnEnemyAttack;
     }
+
+    private void OnEnemyAttack(EnemySO enemyDatas)
+    {
+        float baseDamage = enemyDatas.BaseDamage;
+        float additionnalDamage = 0.0f;
+        //Take damage depending on the enemy type
+
+        switch (_datas.type)
+        {
+            case SummoningSO.SummoningType.Lion:
+                additionnalDamage = enemyDatas.BonusDamageAgainstLion;
+                break;
+            case SummoningSO.SummoningType.Deer:
+                additionnalDamage = enemyDatas.BonusDamageAgainstDeer;
+                break;
+            case SummoningSO.SummoningType.RedPanda:
+                additionnalDamage = enemyDatas.BonusDamageAgainstRedPanda;
+                break;
+        }
+
+        float finalDamage = baseDamage + additionnalDamage;
+        _battleResults.RemainingHealth -= finalDamage;
+        //Play feedback depending on the damage taken
+        //Check if summoning dies
+        if(_battleResults.RemainingHealth <= 0)
+        {
+            SummoningManagerDataHandler.AllySummoningDies();
+        }
+    }
+
 
     public void ChangeSummonning()
     {
@@ -48,7 +80,7 @@ public class Summoning : MonoBehaviour
         //Do damage and change progress bar
 
         Debug.Log("ally attacks");
-        DominationManagerDataHandler.UpdateDominationBar(.4f);
+        DominationManagerDataHandler.UpdateDominationBar(.2f);
     }
 
     public void FinishedAnime()
@@ -59,6 +91,8 @@ public class Summoning : MonoBehaviour
     public void OnDisable()
     {
         SummoningManagerDataHandler.OnAllySummoningAttack -= OnAllySummoningAttack;
+        EnemyManagerDataHandler.OnEnemyAttack -= OnEnemyAttack;
+
 
     }
 }

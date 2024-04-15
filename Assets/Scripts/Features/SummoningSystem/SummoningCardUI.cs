@@ -14,6 +14,7 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _desc;
     [SerializeField] private GameObject _selectionObject;
+    [SerializeField] private GameObject _hideCardObject;
     [SerializeField] private PatternUI _patternUI;
 
     // should not be assigned in the inspector but I put it here until we plug the real health data
@@ -24,9 +25,16 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
 
     public void Init()
     {
+        if(_battleResult?.RemainingHealth <= 0)
+        {
+            //HideCard
+            _hideCardObject.SetActive(true);
+            return;
+        }
         _image.sprite = _cardDatas.CardImage;
         _desc.text = _cardDatas.CardName;
         _selectionObject.SetActive(false);
+        _hideCardObject.SetActive(false);
         _patternUI.SetPattern(_cardDatas.Pattern);
         _patternUI.SetAmount(_health);
         if (_cardDatas is SummoningSO)

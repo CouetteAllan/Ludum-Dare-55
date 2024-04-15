@@ -17,6 +17,13 @@ public class SummoningManager : MonoBehaviour
     {
         TurnBasedManager.OnChangePhase += OnChangePhase;
         SummoningManagerDataHandler.OnDeckClicked += OnDeckClicked;
+        SummoningManagerDataHandler.OnAllySummoningDies += OnAllySummoningDies;
+    }
+
+    private void OnAllySummoningDies()
+    {
+        _summoning.ChangeSummonning();
+        TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning);
     }
 
     private void OnDeckClicked()

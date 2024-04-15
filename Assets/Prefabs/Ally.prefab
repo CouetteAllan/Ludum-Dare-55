@@ -1974,7 +1974,7 @@ ParticleSystem:
     radial:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -7
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4812,7 +4812,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 20
   m_RenderMode: 0
   m_MeshDistribution: 0
-  m_SortMode: 0
+  m_SortMode: 1
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
@@ -4872,7 +4872,7 @@ GameObject:
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8006327636577685970
 Transform:
   m_ObjectHideFlags: 0
@@ -4905,6 +4905,7 @@ MonoBehaviour:
   _animator: {fileID: 8736666816634822234}
   _particleSystemFX: {fileID: 1512513721346035517}
   _spawnParticleSystemFX: {fileID: 6446203252132798161}
+  _dieParticleSystemFX: {fileID: 0}
 --- !u!212 &8277406607810222972
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7008,7 +7009,7 @@ ParticleSystem:
     radial:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9833,10 +9834,10 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 120
+  m_SortingOrder: 21
   m_RenderMode: 0
   m_MeshDistribution: 0
-  m_SortMode: 0
+  m_SortMode: 3
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0

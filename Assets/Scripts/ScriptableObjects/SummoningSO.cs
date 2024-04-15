@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 [CreateAssetMenu (fileName = "New Summoning",menuName = "Card/Summoning")]
 public class SummoningSO : CardSO
 {
@@ -11,6 +13,15 @@ public class SummoningSO : CardSO
     [Header("Spells")]
     public SpellSO[] Spells;
 
+
+    public enum SummoningType
+    {
+        Lion,
+        Deer,
+        RedPanda
+    }
+
+    public SummoningType type;
     public class BattleResult
     {
         public float RemainingHealth;

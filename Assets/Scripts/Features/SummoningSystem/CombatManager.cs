@@ -87,6 +87,11 @@ public class CombatManager : MonoBehaviour
         TurnBasedManager.Instance.ChangePhase(CombatPhase.EnemyAttack);
     }
 
+    public void DealDamageToSummoning()
+    {
+
+    }
+
     private void SummoningCardUI_OnClick(SummoningCardUI card)
     {
         _currentSpell = (SpellSO)card.GetCardDatas();
@@ -132,6 +137,8 @@ public class CombatManager : MonoBehaviour
     {
         SummoningManagerDataHandler.OnAttackPhase -= OnAttackPhase;
         TurnBasedManager.OnChangePhase -= TurnBasedManager_OnChangePhase;
+        SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
+        QTEManagerDataHandler.OnSendScore -= OnSendScore;
 
 
     }
