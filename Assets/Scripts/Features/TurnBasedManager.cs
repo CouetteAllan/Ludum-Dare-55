@@ -101,6 +101,16 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
                 _encounterCanvas.gameObject.SetActive(true);
                 EnemyManagerDataHandler.RegisterEncounterText(_longEncounterText);
                 break;
+
+            case CombatPhase.ChosingInDeck:
+                if (PreviousPhase != CombatPhase.AllyAttack)
+                {
+                    CurrentPhase = PreviousPhase;
+                    _textDebug.text = PreviousPhase.ToString();
+                    PreviousPhase = temp;
+                    return;
+                }
+                break;
         }
 
         OnChangePhase?.Invoke(newPhase);

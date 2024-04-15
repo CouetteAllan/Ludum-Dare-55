@@ -50,7 +50,7 @@ public class EnemyManager : MonoBehaviour
             case CombatPhase.AfterEncounter:
                 if (_encounterText == null)
                     return;
-                _encounterText.text = _enemies[_indexEncounter].PostEncounter;
+                _encounterText.text = _enemies[_indexEncounter - 1].PostEncounter;
                 TextAnimFade();
                 break;
         }
@@ -60,7 +60,7 @@ public class EnemyManager : MonoBehaviour
     private void TextAnimFade()
     {
         _encounterText.alpha = 0.0f;
-        LeanTween.LeanAlphaText(_encounterText, 1.0f, 2.0f).setEaseInCirc();
+        LeanTween.LeanAlphaText(_encounterText, 1.0f, 2.0f);
     }
 
     private void OnDisable()

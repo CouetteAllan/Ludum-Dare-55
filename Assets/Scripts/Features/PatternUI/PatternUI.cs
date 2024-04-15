@@ -18,4 +18,6 @@ public class PatternUI : MonoBehaviour
         _radialBar.Amount = amount;
     }
 
+    public RadialBar GetRadialBar() => _radialBar;
+
 }

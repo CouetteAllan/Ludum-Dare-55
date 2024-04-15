@@ -27,12 +27,12 @@ public class Summoning : MonoBehaviour
             _sprite.color = new Color(1, 1, 1, 1);
             _spawnParticleSystemFX.Play();
             _manager.AttackPhase(2.0f);
+            SummoningManagerDataHandler.AllySummoningSpawn(_datas);
         });
         if(_battleResults == null)
             _battleResults = _datas.GetResults();
 
         EnemyManagerDataHandler.OnEnemyAttack += OnEnemyAttack;
-        SummoningManagerDataHandler.AllySummoningSpawn(this._datas);
     }
 
     private void OnEnemyAttack(EnemySO enemyDatas)

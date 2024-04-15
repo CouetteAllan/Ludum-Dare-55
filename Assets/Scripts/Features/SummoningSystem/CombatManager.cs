@@ -26,13 +26,12 @@ public class CombatManager : MonoBehaviour
         SummoningManagerDataHandler.OnAttackPhase += OnAttackPhase;
         TurnBasedManager.OnChangePhase += TurnBasedManager_OnChangePhase;
         DominationManagerDataHandler.OnDominationComplete += OnDominationComplete;
-        SummoningManagerDataHandler.OnDeckClicked += OnDeckClicked;
+        SummoningManagerDataHandler.OnAllySummoningSpawn += OnAllySummoningSpawn;
     }
 
-    private void OnDeckClicked()
+    private void OnAllySummoningSpawn(SummoningSO summoningDatas)
     {
-        _deckIsClosed = !_deckIsClosed;
-        OnAttackPhase(_allySummoningData);
+        _allySummoningData = summoningDatas;
     }
 
     private void OnDominationComplete(bool allyVictory)
@@ -57,12 +56,14 @@ public class CombatManager : MonoBehaviour
                 _enemyStillHere = true;
                 break;
             case CombatPhase.AllyAttack when _allySummoningData != null:
+                Debug.Log("Ally phase is called");
                 OnAttackPhase(_allySummoningData);
                 break;
             case CombatPhase.ChosingInDeck:
                 QTEManagerDataHandler.OnSendScore -= OnSendScore;
                 SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
                 _deckIsClosed = false;
+                _canva.gameObject.SetActive(false);
                 break;
         }
     }
@@ -87,10 +88,6 @@ public class CombatManager : MonoBehaviour
         TurnBasedManager.Instance.ChangePhase(CombatPhase.EnemyAttack);
     }
 
-    public void DealDamageToSummoning()
-    {
-
-    }
 
     private void SummoningCardUI_OnClick(SummoningCardUI card)
     {
@@ -102,7 +99,6 @@ public class CombatManager : MonoBehaviour
         //Display spell cards
         if (_deckIsClosed)
         {
-            _allySummoningData = summoning;
             _canva.SetActive(true);
             _enemyStillHere = true;
             int index = 0;
@@ -140,6 +136,7 @@ public class CombatManager : MonoBehaviour
         SummoningCardUI.OnClick -= SummoningCardUI_OnClick;
         QTEManagerDataHandler.OnSendScore -= OnSendScore;
 
+        SummoningManagerDataHandler.OnAllySummoningSpawn -= OnAllySummoningSpawn;
 
     }
 }

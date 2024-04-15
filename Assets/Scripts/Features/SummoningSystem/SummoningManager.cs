@@ -31,7 +31,10 @@ public class SummoningManager : MonoBehaviour
         if (_deckIsOpen == true)
             TurnBasedManager.Instance.ChangePhase(CombatPhase.ChosingInDeck);
         else
+        {
             TurnBasedManager.Instance.ChangePhase(TurnBasedManager.Instance.PreviousPhase);
+            OpenSelection(false);
+        }
     }
 
     private void OnSendScore(Score finalPatternScore)
@@ -39,21 +42,28 @@ public class SummoningManager : MonoBehaviour
         //Summon with the according accuracy
         //Instantiate with the _selectedSumoningData if more than a certain accuracy
         _summoning.gameObject.SetActive(true);
-        Debug.Log("Init ALly");
+        Debug.Log("Init Ally");
         _summoning.Init(this, _selectedSummoningData);
-        TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack,true);
+        if(TurnBasedManager.Instance.CurrentPhase == CombatPhase.PickSummoning)
+            TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack,true);
         //2sec delay 
 
     }
 
     public void AttackPhase(float delay = 0)
     {
+        
         StartCoroutine(DelayAttack(delay));
     }
 
     private IEnumerator DelayAttack(float delay)
     {
         yield return new WaitForSeconds(delay);
+        if (TurnBasedManager.Instance.CurrentPhase == CombatPhase.ChosingInDeck)
+        {
+            TurnBasedManager.Instance.ChangePhase(CombatPhase.EnemyAttack);
+            yield break;
+        }
         SummoningManagerDataHandler.AttackPhase(_selectedSummoningData);
     }
 
@@ -73,11 +83,11 @@ public class SummoningManager : MonoBehaviour
             _summoning.ChangeSummonning();
             _summoning.gameObject.SetActive(false);
             OpenSelection(true);
+            _selectedSummoningData = null;
+
         }
         else if(newPhase == CombatPhase.ChosingInDeck)
         {
-            _summoning.ChangeSummonning();
-            _summoning.gameObject.SetActive(false);
             OpenSelection(true);
         }
         else
@@ -113,11 +123,17 @@ public class SummoningManager : MonoBehaviour
 
     public void ConfirmSelectSummoning()
     {
+        if (_selectedSummoningData == null)
+            return;
+
         SummoningCardUI.OnClick -= SummoningUI_OnClick;
         //Close selection Screen
         _canvas.gameObject.SetActive(false);
         //Send datas
+        _summoning.ChangeSummonning();
+        _summoning.gameObject.SetActive(false);
         QTEManagerDataHandler.SendPatternAndStart(_selectedSummoningData.Pattern);
+        _deckCanvas.gameObject.SetActive(false);
         _deckIsOpen = false;
     }
 

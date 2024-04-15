@@ -15,4 +15,3 @@ MonoBehaviour:
   PatternName: Hourglass
   PatternPrefabs:
   - {fileID: 8683889172735665238, guid: 15c5b3221d7e5354ea4a81ea99f548fb, type: 3}
-  - {fileID: 8683889172735665238, guid: a1917fda4d7a17b43bcabe40984b5c64, type: 3}

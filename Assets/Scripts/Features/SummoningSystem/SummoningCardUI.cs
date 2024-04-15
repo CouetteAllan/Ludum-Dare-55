@@ -17,9 +17,6 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _hideCardObject;
     [SerializeField] private PatternUI _patternUI;
 
-    // should not be assigned in the inspector but I put it here until we plug the real health data
-    [Range(0f,1f)]
-    [SerializeField] private float _health = 1f;
 
     private SummoningSO.BattleResult _battleResult;
 
@@ -36,12 +33,16 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
         _selectionObject.SetActive(false);
         _hideCardObject.SetActive(false);
         _patternUI.SetPattern(_cardDatas.Pattern);
-        _patternUI.SetAmount(_health);
         if (_cardDatas is SummoningSO)
         {
             SummoningSO summoningDatas = _cardDatas as SummoningSO;
             _battleResult = summoningDatas.GetResults();
             _patternUI.SetAmount(_battleResult.RemainingHealth);
+            _patternUI.GetRadialBar().gameObject.SetActive(true);
+        }
+        else
+        {
+            _patternUI.GetRadialBar().gameObject.SetActive(false);
         }
         SummoningCardUI.OnClick += SummoningUI_OnClick;
     }
