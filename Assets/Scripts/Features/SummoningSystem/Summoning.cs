@@ -14,6 +14,7 @@ public class Summoning : MonoBehaviour
     private SummoningSO _datas;
     private Action _callBackOnFinishAnim;
     private SpellSO _lastRegisteredSpell;
+    private SummoningSO.BattleResult _battleResults;
     public void Init(SummoningManager manager, SummoningSO datas)
     {
         _manager = manager;
@@ -26,6 +27,8 @@ public class Summoning : MonoBehaviour
             _sprite.color = new Color(1, 1, 1, 1);
             _manager.AttackPhase(2.0f);
         });
+        if(_battleResults == null)
+            _battleResults = _datas.GetResults();
     }
 
     public void ChangeSummonning()

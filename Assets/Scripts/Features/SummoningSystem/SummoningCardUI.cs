@@ -20,6 +20,8 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
     [Range(0f,1f)]
     [SerializeField] private float _health = 1f;
 
+    private SummoningSO.BattleResult _battleResult;
+
     public void Init()
     {
         _image.sprite = _cardDatas.CardImage;
@@ -27,6 +29,12 @@ public class SummoningCardUI : MonoBehaviour, IPointerClickHandler
         _selectionObject.SetActive(false);
         _patternUI.SetPattern(_cardDatas.Pattern);
         _patternUI.SetAmount(_health);
+        if (_cardDatas.Equals(typeof(SummoningSO)))
+        {
+            SummoningSO summoningDatas = _cardDatas as SummoningSO;
+            _battleResult = summoningDatas.GetResults();
+            _patternUI.SetAmount(_battleResult.RemainingHealth);
+        }
         SummoningCardUI.OnClick += SummoningUI_OnClick;
     }
 

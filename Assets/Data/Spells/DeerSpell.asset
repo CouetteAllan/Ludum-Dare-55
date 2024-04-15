@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeerSpell
   m_EditorClassIdentifier: 
   CardName: 
-  Pattern: {fileID: 0}
+  Pattern: {fileID: 11400000, guid: 78bc5e9626456a345a77daeac6ee6b17, type: 2}
   CardImage: {fileID: 0}
   FrankieAffinity: 0
   NoorAffinity: 0

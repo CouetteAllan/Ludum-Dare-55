@@ -10,4 +10,23 @@ public class SummoningSO : CardSO
 
     [Header("Spells")]
     public SpellSO[] Spells;
+
+    public class BattleResult
+    {
+        public float RemainingHealth;
+
+        public BattleResult(float remainingHealth)
+        {
+            RemainingHealth = remainingHealth;
+        }
+    }
+
+    private BattleResult _results = null;
+
+    public BattleResult GetResults()
+    {
+        if(_results == null )
+            _results = new BattleResult(1.0f);
+        return _results;
+    }
 }
