@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyFullName: Frankie The Ashamed
   EnemyName: 0
-  EnemyImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
+  EnemyImage: {fileID: 21300000, guid: 354f3c0b35da77241ada87f1fe6dfa53, type: 3}
   StartDominationInPercent: 0.5
   BaseDamage: 0.2
   BonusDamageAgainstLion: 0

@@ -91,6 +91,11 @@ public class SummoningManager : MonoBehaviour
         {
             OpenSelection(true);
         }
+        else if(newPhase == CombatPhase.AfterEncounter)
+        {
+            _summoning.ChangeSummonning();
+            _summoning.gameObject.SetActive(false);
+        }
         else
         {
             QTEManagerDataHandler.OnSendScore -= OnSendScore;

@@ -9,6 +9,7 @@ public class Summoning : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystemFX _particleSystemFX;
     [SerializeField] private ParticleSystem _spawnParticleSystemFX;
+    [SerializeField] private ParticleSystem _attackFX;
 
     private SummoningManager _manager;
     private SummoningSO _datas;
@@ -87,9 +88,14 @@ public class Summoning : MonoBehaviour
         
     }
 
-    public void FinishedAnime()
+    public void DealDamage()
     {
         SummoningManagerDataHandler.AllySummoningDealDamage(_datas, _lastRegisteredScore, _lastRegisteredSpell);
+        _attackFX.Play();
+    }
+
+    public void FinishedAnime()
+    {
         _callBackOnFinishAnim?.Invoke();
     }
 
