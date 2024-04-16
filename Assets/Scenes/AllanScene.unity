@@ -395,12 +395,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4924860ecca35040b3b888797f896f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxCandle: 12
+  _maxCandle: 16
   _dominationBarParent: {fileID: 1039480034}
   _candleGO: {fileID: 7251179703015332161, guid: 23fcd499b89237d40a4f2b2a44d4f22b, type: 3}
   _candleImages:
-  - {fileID: 21300000, guid: 96929ee4f9dcf734ebc096dee9537ba0, type: 3}
-  - {fileID: 21300000, guid: 6ec4a3f3ea05cd84494868a784c01191, type: 3}
+  - {fileID: 21300000, guid: e9d08b35e18ef0c41b5abd14ca0e2370, type: 3}
+  - {fileID: 21300000, guid: c2cb3f94c21a9c14683d68698a6db9b9, type: 3}
 --- !u!1 &1031317142
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -675,7 +675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285983855}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1277,6 +1277,10 @@ PrefabInstance:
     - target: {fileID: 8006327636577685970, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042904121890179694, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: m_Name
+      value: Body
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

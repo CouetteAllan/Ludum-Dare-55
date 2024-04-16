@@ -10,6 +10,7 @@ public class Summoning : MonoBehaviour
     [SerializeField] private ParticleSystemFX _particleSystemFX;
     [SerializeField] private ParticleSystem _spawnParticleSystemFX;
     [SerializeField] private ParticleSystem _attackFX;
+    [SerializeField] private ParticleSystem _chargeAttackFX;
 
     private SummoningManager _manager;
     private SummoningSO _datas;
@@ -97,6 +98,11 @@ public class Summoning : MonoBehaviour
     public void FinishedAnime()
     {
         _callBackOnFinishAnim?.Invoke();
+    }
+
+    public void DebutAnim()
+    {
+        _chargeAttackFX.Play();
     }
 
     public void OnDisable()
