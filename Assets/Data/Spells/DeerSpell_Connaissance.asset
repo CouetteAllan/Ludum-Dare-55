@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6e52bcc3452794fb459edb32c6445c, type: 3}
   m_Name: DeerSpell_Connaissance
   m_EditorClassIdentifier: 
-  CardName: 
+  CardName: Antrer Awareness
   Pattern: {fileID: 11400000, guid: 78bc5e9626456a345a77daeac6ee6b17, type: 2}
   CardImage: {fileID: 21300000, guid: 9b5190a0871d74745be38090ed40cce0, type: 3}
-  FrankieAffinity: 0
-  NoorAffinity: 0
-  VadimAffinity: 0
+  FrankieAffinity: 3
+  NoorAffinity: 2
+  VadimAffinity: 2
