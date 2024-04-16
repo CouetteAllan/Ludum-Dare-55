@@ -80,7 +80,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
             case CombatPhase.Encounter:
                 //Play Encounter;
                 _encounterCanvas.gameObject.SetActive(false);
-                Invoke("ChangeToPickPhase", 2.0f);
+                Invoke("ChangeToPickPhase", 3.0f);
                 break;
             case CombatPhase.PickSummoning:
                 break;

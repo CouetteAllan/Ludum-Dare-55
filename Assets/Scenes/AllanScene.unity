@@ -397,7 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxCandle: 16
   _dominationBarParent: {fileID: 1039480034}
-  _candleGO: {fileID: 7251179703015332161, guid: 23fcd499b89237d40a4f2b2a44d4f22b, type: 3}
+  _candleGO: {fileID: 4683001355347329035, guid: 23fcd499b89237d40a4f2b2a44d4f22b, type: 3}
   _candleImages:
   - {fileID: 21300000, guid: e9d08b35e18ef0c41b5abd14ca0e2370, type: 3}
   - {fileID: 21300000, guid: c2cb3f94c21a9c14683d68698a6db9b9, type: 3}

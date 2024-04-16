@@ -7,12 +7,12 @@ public class DominationManager : MonoBehaviour
 {
     [SerializeField] private int _maxCandle = 10;
     [SerializeField] private RectTransform _dominationBarParent;
-    [SerializeField] private Image _candleGO;
+    [SerializeField] private SingleCandleUI _candleGO;
     [SerializeField] private Sprite[] _candleImages = new Sprite[2];
     private EnemySO _currentEnemyData;
     private float _progressPercent = .5f;
 
-    private List<Image> _candles = new List<Image>();
+    private List<SingleCandleUI> _candles = new List<SingleCandleUI>();
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class DominationManager : MonoBehaviour
             DominationManagerDataHandler.DominationComplete(allyVictory: true);
 
         //Update visuals
-        RefreshCandles(_progressPercent);
+        RefreshCandles(_progressPercent, dominationPercentChange >= 0);
     }
 
     private void OnInitEnemy(EnemySO currentEnemyData)
@@ -50,33 +50,71 @@ public class DominationManager : MonoBehaviour
             _candles.Clear();
         }
 
-        Debug.Log("Init Progress");
-        int remainingCandles = Mathf.FloorToInt(_progressPercent * _maxCandle);
-        int evilCandles = _maxCandle - remainingCandles;
-
-        for (int i = 0; i < remainingCandles; i++)
-        {
-            Image candle = Instantiate(_candleGO, _dominationBarParent);
-            candle.sprite = _candleImages[0];
-            _candles.Add(candle);
-        }
-        for (int i = 0; i < evilCandles; i++)
-        {
-            Image candle = Instantiate(_candleGO, _dominationBarParent);
-            candle.sprite = _candleImages[1];
-            _candles.Add(candle);
-        }
+        StartCoroutine(BounceCandlesInit(_progressPercent));
     }
 
-    private void RefreshCandles(float remainingCandlesInPercent)
+    private void RefreshCandles(float remainingCandlesInPercent, bool positiveChanges)
     {
+        StartCoroutine(BounceCandles(remainingCandlesInPercent,positiveChanges));
+    }
+    private IEnumerator BounceCandlesInit(float remainingCandlesInPercent)
+    {
+
         int remainingCandles = Mathf.FloorToInt(remainingCandlesInPercent * _maxCandle);
         int evilCandles = _maxCandle - remainingCandles;
 
         for (int i = 0; i < _maxCandle; i++)
         {
-            _candles[i].sprite = i < remainingCandles ? _candleImages[0] : _candleImages[1];
+            SingleCandleUI candle = Instantiate(_candleGO, _dominationBarParent);
+            _candles.Add(candle);
         }
+        yield return null;
+        yield return null;
+
+
+        for (int i = 0; i < remainingCandles; i++)
+        {
+            _candles[i].ChangeSprite(_candleImages[0]);
+            _candles[i].Bounce();
+            yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+        }
+
+
+        for (int i = _candles.Count - 1; i >= evilCandles; i--)
+        {
+            _candles[i].ChangeSprite(_candleImages[1]);
+            _candles[i].Bounce();
+            yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+        }
+
+
+    }
+
+    private IEnumerator BounceCandles(float remainingCandlesInPercent, bool positiveChanges)
+    {
+
+        int remainingCandles = Mathf.FloorToInt(remainingCandlesInPercent * _maxCandle);
+        int evilCandles = _maxCandle - remainingCandles;
+
+        if (positiveChanges)
+        {
+            for (int i = 0; i < remainingCandles; i++)
+            {
+                _candles[i].ChangeSprite(_candleImages[0]);
+                _candles[i].Bounce();
+                yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+            }
+        }
+        else
+        {
+            for (int i = _candles.Count - 1; i >= evilCandles; i--)
+            {
+                _candles[i].ChangeSprite(_candleImages[1]);
+                _candles[i].Bounce();
+                yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+            }
+        }
+        
     }
 
 
