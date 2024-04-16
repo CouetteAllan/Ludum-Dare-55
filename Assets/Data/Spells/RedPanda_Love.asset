@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6e52bcc3452794fb459edb32c6445c, type: 3}
   m_Name: RedPanda_Love
   m_EditorClassIdentifier: 
-  CardName: Trust
+  CardName: Cuddly Fur
   Pattern: {fileID: 11400000, guid: 90c294eea2de6764592644f0ce7107c9, type: 2}
   CardImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   FrankieAffinity: 2
-  NoorAffinity: 4
-  VadimAffinity: 4
+  NoorAffinity: 3
+  VadimAffinity: 2

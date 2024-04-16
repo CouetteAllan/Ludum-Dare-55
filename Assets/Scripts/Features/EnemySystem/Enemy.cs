@@ -11,10 +11,37 @@ public class Enemy : MonoBehaviour
 
     public void Init(EnemySO datas,EnemyManager manager)
     {
+        SummoningManagerDataHandler.OnAllySummoningDealDamage -= OnAllySummoningDealDamage;
         _datas = datas;
         _sprite.sprite = datas.EnemyImage;
         EnemyManagerDataHandler.InitEnemy(datas);
         _manager = manager;
+        SummoningManagerDataHandler.OnAllySummoningDealDamage += OnAllySummoningDealDamage;
+    }
+
+    private void OnAllySummoningDealDamage(SummoningSO summoningDatas, Score spellScore, SpellSO spellDatas)
+    {
+        float baseDamage = .1f;
+        float bonusDamage = 0f;
+
+
+        bonusDamage += Mathf.Lerp(0.0f, 0.2f, Mathf.InverseLerp(84.0f,100.0f,spellScore.accuracy));
+
+        switch (_datas.EnemyName)
+        {
+            case EnemyType.Frankie:
+                bonusDamage += spellDatas.GetBonusDamageWithAffinity(spellDatas.FrankieAffinity);
+                break;
+            case EnemyType.Noor:
+                bonusDamage += spellDatas.GetBonusDamageWithAffinity(spellDatas.NoorAffinity);
+                break;
+            case EnemyType.Vadim:
+                bonusDamage += spellDatas.GetBonusDamageWithAffinity(spellDatas.VadimAffinity);
+                break;
+        }
+        float finalDamage = baseDamage + bonusDamage;
+        Debug.Log("Final Damages are: " + finalDamage);
+        DominationManagerDataHandler.UpdateDominationBar(finalDamage);
     }
 
     public void EnemyAttack()
@@ -32,4 +59,5 @@ public class Enemy : MonoBehaviour
     {
         TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
     }
+
 }

@@ -78,7 +78,6 @@ public class CombatManager : MonoBehaviour
             Debug.Log("AttackMissed");
             EndAllyTurn();
         }
-        //Do HealthChange
     }
 
     private void EndAllyTurn()

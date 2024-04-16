@@ -14,6 +14,7 @@ public class Summoning : MonoBehaviour
     private SummoningSO _datas;
     private Action _callBackOnFinishAnim;
     private SpellSO _lastRegisteredSpell;
+    private Score _lastRegisteredScore;
     private SummoningSO.BattleResult _battleResults;
     public void Init(SummoningManager manager, SummoningSO datas)
     {
@@ -78,16 +79,17 @@ public class Summoning : MonoBehaviour
     {
         _callBackOnFinishAnim = callback;
         _lastRegisteredSpell = lastRegisteredSpell;
+        _lastRegisteredScore = finalPatternScore;
         //Do anim attack
+        Debug.Log("ally attacks");
         _animator.SetTrigger("Attack");
         //Do damage and change progress bar
-
-        Debug.Log("ally attacks");
-        DominationManagerDataHandler.UpdateDominationBar(.2f);
+        
     }
 
     public void FinishedAnime()
     {
+        SummoningManagerDataHandler.AllySummoningDealDamage(_datas, _lastRegisteredScore, _lastRegisteredSpell);
         _callBackOnFinishAnim?.Invoke();
     }
 
