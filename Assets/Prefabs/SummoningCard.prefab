@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 5532593742044012941}
   - component: {fileID: 800340460629506267}
   - component: {fileID: 7404622195428416699}
+  - component: {fileID: 2164360916660864512}
   m_Layer: 5
   m_Name: SummoningCard
   m_TagString: Untagged
@@ -323,7 +324,26 @@ MonoBehaviour:
   _selectionObject: {fileID: 6125793344749892850}
   _hideCardObject: {fileID: 4183486912461242717}
   _patternUI: {fileID: 8990685687465196382}
-  _health: 1
+--- !u!114 &2164360916660864512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330790255464421168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &6125793344749892850
 GameObject:
   m_ObjectHideFlags: 0

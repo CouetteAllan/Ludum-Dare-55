@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SummoningManager : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
     [SerializeField] private SummoningCardUI[] _summoningUis;
+    [SerializeField] private GameObject[] _summoningUiPos;
     [SerializeField] private GameObject _deckBackButton;
     [Header("Summonings")]
     [SerializeField] private Summoning _summoning;
@@ -17,9 +19,55 @@ public class SummoningManager : MonoBehaviour
         TurnBasedManager.OnChangePhase += OnChangePhase;
         SummoningManagerDataHandler.OnDeckClicked += OnDeckClicked;
         SummoningManagerDataHandler.OnAllySummoningDies += OnAllySummoningDies;
+        SummoningManagerDataHandler.OnEncounter += OnEncounter;
     }
 
+    //Anims intro
+    private void OnEncounter()
+    {
+        StartCoroutine(ChainCoroutine());
+    }
+    private IEnumerator ChainCoroutine()
+    {
+        _canvas.gameObject.SetActive(true);
 
+        foreach (var item in _summoningUis)
+        {
+            item.transform.position = new Vector3(0, 0, 0);
+            item.gameObject.SetActive(false);
+
+        }
+        var group = _canvas.GetComponent<CanvasGroup>();
+        group.alpha = 0.0f;
+        bool completed = false;
+        LeanTween.alphaCanvas(group, 1, 1f).setOnComplete(() => completed = true);
+        yield return new WaitUntil(()=>completed);
+
+
+        yield return StartCoroutine(DrawCards());
+
+
+        TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning);
+    }
+
+    private IEnumerator DrawCards()
+    {
+        yield return null;
+        int completed = 0;
+        for (int i = 0; i < _summoningUiPos.Length; i++)
+        {
+            _summoningUis[i].gameObject.SetActive(true);
+            LayoutElement element = _summoningUis[i].GetComponent<LayoutElement>();
+            element.ignoreLayout = true;
+            LeanTween.move(_summoningUis[i].gameObject, _summoningUiPos[i].transform, 1.0f).setEaseOutQuad().setOnComplete(() => { ; completed++; element.ignoreLayout = false; });
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitUntil(() => completed >= 3);
+        yield return null;
+        yield return null;
+
+    }
     private void OnAllySummoningDies()
     {
         TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning,true);
@@ -144,6 +192,7 @@ public class SummoningManager : MonoBehaviour
     private void OnDisable()
     {
         TurnBasedManager.OnChangePhase -= OnChangePhase;
+        SummoningManagerDataHandler.OnEncounter -= OnEncounter;
 
     }
 }

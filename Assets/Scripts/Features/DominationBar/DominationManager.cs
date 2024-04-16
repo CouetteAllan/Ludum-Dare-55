@@ -71,20 +71,21 @@ public class DominationManager : MonoBehaviour
         yield return null;
         yield return null;
 
-
+        int endLoop = -1;
         for (int i = 0; i < remainingCandles; i++)
         {
             _candles[i].ChangeSprite(_candleImages[0]);
             _candles[i].Bounce();
-            yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+            yield return new WaitForSeconds((float)(1.2f / _maxCandle));
+            endLoop = i;
         }
 
 
-        for (int i = _candles.Count - 1; i >= evilCandles; i--)
+        for (int i = _maxCandle - 1; i > endLoop; i--)
         {
             _candles[i].ChangeSprite(_candleImages[1]);
             _candles[i].Bounce();
-            yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+            yield return new WaitForSeconds((float)(1.2f / _maxCandle));
         }
 
 
@@ -94,6 +95,7 @@ public class DominationManager : MonoBehaviour
     {
 
         int remainingCandles = Mathf.FloorToInt(remainingCandlesInPercent * _maxCandle);
+        Debug.Log(remainingCandles);
         int evilCandles = _maxCandle - remainingCandles;
 
         if (positiveChanges)
@@ -102,19 +104,23 @@ public class DominationManager : MonoBehaviour
             {
                 _candles[i].ChangeSprite(_candleImages[0]);
                 _candles[i].Bounce();
-                yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+                yield return new WaitForSeconds((float)(.7f / _maxCandle));
             }
         }
         else
         {
-            for (int i = _candles.Count - 1; i >= evilCandles; i--)
+            for (int i = _maxCandle - 1; i >= remainingCandles; i--)
             {
                 _candles[i].ChangeSprite(_candleImages[1]);
                 _candles[i].Bounce();
-                yield return new WaitForSeconds((float)(1.0f / _maxCandle));
+                yield return new WaitForSeconds((float)(.8f / _maxCandle));
             }
         }
         
+
+
+        
+
     }
 
 
