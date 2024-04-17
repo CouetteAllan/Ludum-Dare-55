@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private EnemySO[] _enemies;
     [SerializeField] private Enemy _enemy;
+    [SerializeField] private EnemiesAnimsTween _animsTween;
     private int _indexEncounter = 0;
     private TextMeshProUGUI _encounterText;
     private void Awake()
@@ -35,6 +36,7 @@ public class EnemyManager : MonoBehaviour
                 _enemy.gameObject.SetActive(true);
                 _enemy.transform.position = Vector3.zero;
                 _enemy.Init(_enemies[_indexEncounter],this);
+                DisplayEncounter(_enemies[_indexEncounter]);
                 _indexEncounter++;
                 break;
             case CombatPhase.PickSummoning:
@@ -55,6 +57,12 @@ public class EnemyManager : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void DisplayEncounter(EnemySO currentEnemyData)
+    {
+        //Display name and wait untill the anim is done
+        _animsTween.DisplayEnemies(_enemy, currentEnemyData);
     }
 
     private void TextAnimFade()
