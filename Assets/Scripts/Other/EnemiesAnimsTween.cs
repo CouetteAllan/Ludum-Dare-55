@@ -22,15 +22,18 @@ public class EnemiesAnimsTween : MonoBehaviour
         //Display Name
         sequence.append(() => {
             _textSlowingAppear.gameObject.SetActive(true);
+            _textSlowingAppear.alpha = 0.0f;
+            _enemyTitleText.alpha = 0.0f;
+            _textSlowingAppear.transform.localScale = new Vector3(0, 1);
             _enemyTitleText.text = enemyDatas.EnemyFullName;
         });
-        sequence.append(LeanTween.alphaCanvas(_textSlowingAppear, 1.0f, .5f).setEaseOutSine());
+        sequence.append(LeanTween.alphaCanvas(_textSlowingAppear, 1.0f, .7f).setEaseOutSine());
         sequence.append(LeanTween.scaleX(_textSlowingAppear.gameObject, 1.0f, .5f).setEaseInOutCubic());
         sequence.append(LeanTween.LeanAlphaText(_enemyTitleText, 1, .7f));
         sequence.append(delay: 1.0f);
         sequence.append(() =>
         {
-            TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning);
+            SummoningManagerDataHandler.Encounter();
             _textSlowingAppear.gameObject.SetActive(false);
         });
     }

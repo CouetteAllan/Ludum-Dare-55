@@ -118,7 +118,6 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
 
     private void ChangeToPickPhase()
     {
-        SummoningManagerDataHandler.Encounter();
     }
 
     private void ChangeToAllyPhase()

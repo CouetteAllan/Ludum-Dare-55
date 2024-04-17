@@ -40,9 +40,12 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (_hasBeenClicked)
+            return;
         var cam = Utils.MainCamera;
 
         _hasBeenClicked = true;
+        _edgeRectTransform.gameObject.SetActive(false);
         
         if (!_manager.IsDrawing)
             _manager.StartDrawing(this.transform.position);
@@ -60,6 +63,7 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
         var maxScale = _edgeRectTransform.localScale * 4;
         var minScale = _edgeRectTransform.localScale;
         float duration = 0.0f;
+        _edgeRectTransform.gameObject.SetActive(true);
         _edgeRectTransform.localScale = maxScale;
         while (Time.time < startTime + _circleDuration)
         {
@@ -77,14 +81,18 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
             duration += Time.deltaTime;
             yield return null;
         }
-
-        PrecisionState precision = EvaluatePrecision(_circleDuration - duration);
+        bool isRight = true;
+        PrecisionState precision = EvaluatePrecision(_circleDuration - duration, out isRight);
         QTEManagerDataHandler.CircleClicked(precision);
-        this.gameObject.SetActive(false);
+        if (isRight)
+            this.gameObject.SetActive(false);
+        else
+            LeanTween.moveX(gameObject, 3.0f, .5f).setEasePunch().setOnComplete(() => this.gameObject.SetActive(false));
     }
 
-    private PrecisionState EvaluatePrecision(float clickTime)
+    private PrecisionState EvaluatePrecision(float clickTime, out bool isRight)
     {
+        isRight = true;
         float absTime = Mathf.Abs(clickTime);
         absTime = absTime / _circleDuration;
         switch (absTime)
@@ -100,6 +108,7 @@ public class CircleQTE : MonoBehaviour, IPointerDownHandler
             default:
                 var missedParticles = Instantiate(_particleSystemsFeedback[1], this.transform.position + Vector3.forward * -3.0f, Quaternion.identity);
                 missedParticles.Play();
+                isRight = false;
                 return PrecisionState.Missed;
         }
     }
