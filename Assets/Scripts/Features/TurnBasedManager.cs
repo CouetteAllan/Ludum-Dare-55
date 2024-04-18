@@ -47,9 +47,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
 
     private void OnDominationComplete(bool allyVictory)
     {
-        if (allyVictory)
-            Invoke("ChangeToAfterEncounter", 2.0f);
-        else
+        if(!allyVictory)
             GameManager.Instance.ChangeGameState(GameState.GameOver);
     }
 
@@ -118,6 +116,7 @@ public class TurnBasedManager : Singleton<TurnBasedManager>
 
     private void ChangeToPickPhase()
     {
+        SummoningManagerDataHandler.Encounter();
     }
 
     private void ChangeToAllyPhase()

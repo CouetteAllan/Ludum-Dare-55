@@ -6,17 +6,31 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private ParticleSystemFX _winParticles;
     private EnemySO _datas;
     private EnemyManager _manager;
 
     public void Init(EnemySO datas,EnemyManager manager)
     {
-        SummoningManagerDataHandler.OnAllySummoningDealDamage -= OnAllySummoningDealDamage;
+        UnSubscribeEvent();
+
+
+
         _datas = datas;
         _sprite.sprite = datas.EnemyImage;
         EnemyManagerDataHandler.InitEnemy(datas);
         _manager = manager;
         SummoningManagerDataHandler.OnAllySummoningDealDamage += OnAllySummoningDealDamage;
+        DominationManagerDataHandler.OnDominationComplete += OnDominationComplete;
+    }
+
+    private void OnDominationComplete(bool allyWon)
+    {
+        if (allyWon)
+        {
+            LeanTween.alpha(gameObject, .5f, 4).setEaseInBounce();
+            _winParticles.InitAndPlayParticle(() => LeanTween.alpha(gameObject, .0f, 1.0f).setEaseOutBounce().setOnComplete(() => TurnBasedManager.Instance.ChangePhase(CombatPhase.AfterEncounter)));
+        }
     }
 
     private void OnAllySummoningDealDamage(SummoningSO summoningDatas, Score spellScore, SpellSO spellDatas)
@@ -58,6 +72,12 @@ public class Enemy : MonoBehaviour
     public void EndEnemyAttack()
     {
         TurnBasedManager.Instance.ChangePhase(CombatPhase.AllyAttack);
+    }
+
+    private void UnSubscribeEvent()
+    {
+        SummoningManagerDataHandler.OnAllySummoningDealDamage -= OnAllySummoningDealDamage;
+        DominationManagerDataHandler.OnDominationComplete -= OnDominationComplete;
     }
 
 }

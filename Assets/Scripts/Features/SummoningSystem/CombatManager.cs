@@ -136,6 +136,7 @@ public class CombatManager : MonoBehaviour
         QTEManagerDataHandler.OnSendScore -= OnSendScore;
 
         SummoningManagerDataHandler.OnAllySummoningSpawn -= OnAllySummoningSpawn;
+        DominationManagerDataHandler.OnDominationComplete -= OnDominationComplete;
 
     }
 }
