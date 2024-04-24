@@ -18,6 +18,16 @@ public class DominationManager : MonoBehaviour
     {
         EnemyManagerDataHandler.OnInitEnemy += OnInitEnemy;
         DominationManagerDataHandler.OnUpdateDominationBar += OnUpdateDominationBar;
+        SummoningManagerDataHandler.OnAllySummoningDies += OnAllySummoningDies;
+    }
+
+    private void OnAllySummoningDies()
+    {
+        _progressPercent = Mathf.Clamp(_progressPercent -.2f, 0.0f, 1.0f);
+        if (_progressPercent <= 0.0f)
+            DominationManagerDataHandler.DominationComplete(allyVictory: false);
+
+        RefreshCandles(_progressPercent, false);
     }
 
     private void OnUpdateDominationBar(float dominationPercentChange)

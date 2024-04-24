@@ -63,7 +63,9 @@ public class Summoning : MonoBehaviour
         //Check if summoning dies
         if(_battleResults.RemainingHealth <= 0)
         {
+            //Play anim before 
             SummoningManagerDataHandler.AllySummoningDies();
+            DeathSequence();
         }
     }
 
@@ -103,6 +105,22 @@ public class Summoning : MonoBehaviour
     public void DebutAnim()
     {
         _chargeAttackFX.Play();
+    }
+
+    private void DeathSequence()
+    {
+        var tweenSequence = LeanTween.sequence();
+        LeanTween.alpha(gameObject, .5f, 2.5f).setEaseInSine().setDelay(1.6f);
+        tweenSequence.append(delay: 1.0f);
+        tweenSequence.append(() =>
+        {
+            LeanTween.scaleX(this.gameObject, .4f, 1f).setEaseOutElastic();
+            LeanTween.scaleY(this.gameObject, 1.2f, .6f).setEaseOutQuart().setDelay(.4f);
+        });
+        tweenSequence.append(() => LeanTween.moveX(gameObject, this.transform.position.x + -3.0f, 1f));
+        tweenSequence.append(delay: .5f);
+        tweenSequence.append(() => TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning,true));
+        
     }
 
     public void OnDisable()

@@ -120,6 +120,8 @@ public class CombatManager : MonoBehaviour
 
     public void ConfirmSelectSummoning()
     {
+        if (_currentSpell == null)
+            return;
         //Close selection Screen
         _canva.gameObject.SetActive(false);
         //Send datas

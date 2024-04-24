@@ -18,16 +18,15 @@ public class SummoningManager : MonoBehaviour
     {
         TurnBasedManager.OnChangePhase += OnChangePhase;
         SummoningManagerDataHandler.OnDeckClicked += OnDeckClicked;
-        SummoningManagerDataHandler.OnAllySummoningDies += OnAllySummoningDies;
         SummoningManagerDataHandler.OnEncounter += OnEncounter;
     }
 
     //Anims intro
     private void OnEncounter()
     {
-        StartCoroutine(ChainCoroutine());
+        StartCoroutine(ChainCoroutine_DrawCards());
     }
-    private IEnumerator ChainCoroutine()
+    private IEnumerator ChainCoroutine_DrawCards()
     {
         _canvas.gameObject.SetActive(true);
 
@@ -59,7 +58,7 @@ public class SummoningManager : MonoBehaviour
             _summoningUis[i].gameObject.SetActive(true);
             LayoutElement element = _summoningUis[i].GetComponent<LayoutElement>();
             element.ignoreLayout = true;
-            LeanTween.move(_summoningUis[i].gameObject, _summoningUiPos[i].transform, 1.0f).setEaseOutQuad().setOnComplete(() => { ; completed++; element.ignoreLayout = false; });
+            LeanTween.move(_summoningUis[i].gameObject, _summoningUiPos[i].transform, 1.0f).setEaseInQuad().setOnComplete(() => { ; completed++; element.ignoreLayout = false; });
             yield return new WaitForSeconds(0.5f);
         }
 
@@ -67,10 +66,6 @@ public class SummoningManager : MonoBehaviour
         yield return null;
         yield return null;
 
-    }
-    private void OnAllySummoningDies()
-    {
-        TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning,true);
     }
 
     private void OnDeckClicked(bool _isDeck)
@@ -137,7 +132,8 @@ public class SummoningManager : MonoBehaviour
         }
         else if(newPhase == CombatPhase.ChosingInDeck)
         {
-            OpenSelection(true);
+            StartCoroutine(ChainCoroutine_DrawCards());
+
         }
         else if(newPhase == CombatPhase.AfterEncounter)
         {
@@ -160,10 +156,27 @@ public class SummoningManager : MonoBehaviour
             QTEManagerDataHandler.OnSendScore += OnSendScore;
 
             _canvas.gameObject.SetActive(true);
-            foreach (var _summoningUI in _summoningUis)
+            if(TurnBasedManager.Instance.PreviousPhase == CombatPhase.Encounter)
             {
-                _summoningUI.Init();
+                foreach (var _summoningUI in _summoningUis)
+                {
+                    _summoningUI.Init();
+                }
             }
+            else
+            {
+                var canvasGroup = _canvas.GetComponent<CanvasGroup>();
+                canvasGroup.alpha = 0.0f;
+                LeanTween.alphaCanvas(canvasGroup, 1.0f, 1.5f).setEaseInCubic().setOnComplete(() =>
+                {
+                    foreach (var _summoningUI in _summoningUis)
+                    {
+                        _summoningUI.Init();
+                    }
+                });
+            }
+            
+            
         }
         else
         {
