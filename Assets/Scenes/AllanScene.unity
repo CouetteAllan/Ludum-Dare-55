@@ -197,7 +197,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -200
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.7176471, g: 0.2352941, b: 0.51310354, a: 0.7294118}
+  m_Color: {r: 0.007342473, g: 0.016851844, b: 0.028301895, a: 0.7294118}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -207,6 +207,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &94693600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94693601}
+  m_Layer: 0
+  m_Name: Summoning Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &94693601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94693600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1513451466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &326405186 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8006327636577685970, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
@@ -6225,6 +6256,7 @@ Transform:
   - {fileID: 71349404}
   - {fileID: 326405186}
   - {fileID: 1285983856}
+  - {fileID: 94693601}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1747178328
@@ -6559,6 +6591,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5062953698149583686, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5062953698149583686, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403208693190059741, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
+      propertyPath: _summoningStartingPos
+      value: 
+      objectReference: {fileID: 94693601}
     - target: {fileID: 8006327636577685970, guid: d341660ca8fc4f941bd482eb448a7704, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.4

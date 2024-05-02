@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardName: The Proud Lion
   Pattern: {fileID: 11400000, guid: 90c294eea2de6764592644f0ce7107c9, type: 2}
-  CardImage: {fileID: 21300000, guid: ff599b14111001d47814da05546d31d2, type: 3}
+  CardImage: {fileID: 21300000, guid: 7728d24f5bb0b5b499f3d3369f4a4ed1, type: 3}
   Health: 5
   Spells:
   - {fileID: 11400000, guid: 9d3f3e431a244e14f9c8f0bb81c6ac71, type: 2}

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Summoning : MonoBehaviour
 {
+
+    [SerializeField] private Transform _summoningStartingPos;
+    [Header("Settings")]
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystemFX _particleSystemFX;
@@ -24,6 +27,8 @@ public class Summoning : MonoBehaviour
         _sprite.sprite = datas.CardImage;
         _sprite.color = new Color(1, 1, 1, 0);
         _datas = datas;
+        this.transform.localScale = Vector3.one;
+        this.transform.position = _summoningStartingPos.position;
         SummoningManagerDataHandler.OnAllySummoningAttack += OnAllySummoningAttack;
         _particleSystemFX.InitAndPlayParticle(() => 
         {
@@ -119,6 +124,8 @@ public class Summoning : MonoBehaviour
         });
         tweenSequence.append(() => LeanTween.moveX(gameObject, this.transform.position.x + -3.0f, 1f));
         tweenSequence.append(delay: .5f);
+        tweenSequence.append(() => LeanTween.moveY(gameObject, this.transform.position.y - 6.0f,2.0f).setEaseOutCubic());
+        tweenSequence.append(delay: 1.0f);
         tweenSequence.append(() => TurnBasedManager.Instance.ChangePhase(CombatPhase.PickSummoning,true));
         
     }
